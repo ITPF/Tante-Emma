@@ -38,6 +38,9 @@ public class JDBCConnector {
         }
     }
 
+    public void query() {
+    	
+    }
 
 
 }
