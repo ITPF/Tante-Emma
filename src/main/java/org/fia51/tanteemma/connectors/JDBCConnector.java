@@ -3,6 +3,9 @@ package org.fia51.tanteemma.connectors;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.fia51.tanteemma.models.User;
 import sun.plugin2.main.server.ResultHandler;
 
 import java.sql.Connection;
@@ -11,6 +14,8 @@ import java.sql.SQLException;
 
 /**
  * Created by ffigorstoljarow on 17.05.2017.
+ *
+ * TODO: Dynamische Queries und Query Templates erstellen
  */
 public class JDBCConnector {
 
@@ -29,18 +34,23 @@ public class JDBCConnector {
         this.runner = new QueryRunner();
     }
 
-    public void connect() {
+    public void connect() throws SQLException {
+        DbUtils.loadDriver(driver);
+        connection = DriverManager.getConnection(url);
+    }
+
+    public User runQuery(String query, String where) throws SQLException {
+        ResultSetHandler<User> resultHandler = new BeanHandler<User>(User.class);
+
+        User person = null;
         try {
-            DbUtils.loadDriver(driver);
-            connection = DriverManager.getConnection(url);
+            person = runner.query(connection, query, resultHandler, where);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbUtils.close(connection);
         }
+        return person;
     }
-
-    public void query() {
-    	
-    }
-
 
 }
