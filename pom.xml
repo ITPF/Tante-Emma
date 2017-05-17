@@ -3,4 +3,15 @@
   <groupId>org.itpf</groupId>
   <artifactId>tante-emma</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+    <dependency>
+      <groupId>commons-dbutils</groupId>
+      <artifactId>commons-dbutils</artifactId>
+      <version>1.6</version>
+    </dependency>
+
+  </dependencies>
+
 </project>
