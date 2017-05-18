@@ -19,7 +19,7 @@ public class AppTest {
     public AppTest() {
         configs = new Configurations();
         try {
-            config = configs.properties(new File("application.properties"));
+            config = configs.properties(new File("src/main/resources/application.properties"));
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }
