@@ -3,7 +3,7 @@ package org.fia51.tanteemma.models;
 /**
  * Created by ffigorstoljarow on 17.05.2017.
  */
-public class Person {
+public class Person implements Dao{
     private long personid;
     private String name;
     private String vorname;
@@ -20,6 +20,9 @@ public class Person {
         this.telefon = telefon;
         this.email = email;
         this.rolle = rolle;
+    }
+
+    public Person() {
     }
 
     public long getPersonid() {
@@ -76,5 +79,13 @@ public class Person {
 
     public void setRolle(String rolle) {
         this.rolle = rolle;
+    }
+
+    public String getCreateQuery() {
+        return null;
+    }
+
+    public String getDeleteQuery() {
+        return null;
     }
 }

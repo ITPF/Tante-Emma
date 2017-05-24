@@ -9,14 +9,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbDaoImplJdbc<T> implements DbDao {
+public class DbDaoImplJdbc implements DbDao {
     private QueryRunner runner;
     private String url;
-    private Class<T> tClass;
 
-    public DbDaoImplJdbc(Class<T> tClass) {
+    public DbDaoImplJdbc() {
         this.runner = new QueryRunner();
-        this.tClass = tClass;
     }
 
     public void setConnection(String url, String driver, String user, String password) throws SQLException {
@@ -24,9 +22,9 @@ public class DbDaoImplJdbc<T> implements DbDao {
         this.url = url;
     }
 
-    public T runSelectQuery(String query) throws SQLException {
+    public <T> T runSelectQuery(Class<T> modelClass, String query) throws SQLException {
         Connection connection = DriverManager.getConnection(url);
-        ResultSetHandler<T> resultHandler = new BeanHandler<T>(tClass);
+        ResultSetHandler<T> resultHandler = new BeanHandler<T>(modelClass);
         T model = runner.query(connection, query, resultHandler);
         DbUtils.close(connection);
         return model;
