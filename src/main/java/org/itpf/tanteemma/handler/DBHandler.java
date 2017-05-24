@@ -55,7 +55,7 @@ public class DBHandler {
     // --- PERSON
 
     public int createPersonTable() {
-        return tryRunUpdateQuery("create table if not exists person (id mediumint not null auto_increment(), name varchar(256), vorname varchar(256), geschlecht varchar(256), telefon varchar(256), email varchar(256), rolle varchar(256), primary key (id))");
+        return tryRunUpdateQuery("create table if not exists person (pn_id mediumint not null auto_increment(), v_name varchar(256), v_vorname varchar(256), v_geschlecht varchar(256), v_telefon varchar(256), v_email varchar(256), v_rolle varchar(256), primary key (pn_id))");
 
     }
 
@@ -70,7 +70,7 @@ public class DBHandler {
 
     public int insertNewPerson(Person person) {
         int rowsUpdated = createPersonTable();
-        String query = "insert into person (name, vorname, geschlecht, telefon, email, rolle) values ('"
+        String query = "insert into person (v_name, v_vorname, v_geschlecht, v_telefon, v_email, v_rolle) values ('"
                 + person.getName() + "', '"
                 + person.getVorname() + "', '"
                 + person.getGeschlecht() + "', '"
@@ -85,11 +85,11 @@ public class DBHandler {
     // --- Artikel
 
     public int createArtikelTable() {
-        return tryRunUpdateQuery("create table if not exists artikel (id mediumint not null auto_increment(), artikelname varchar(256), bezeichnung varchar(256), preis integer, menge integer, primary key (id))");
+        return tryRunUpdateQuery("create table if not exists artikel (pn_id mediumint not null auto_increment(), v_artikelname varchar(256), v_bezeichnung varchar(256), n_preis integer, n_menge integer, primary key (pn_id))");
     }
 
     public int insertNewArtikel(Artikel artikel) {
-        String query = "insert into artikel (artikelname, bezeichnung, preis, meinge) values ('" +
+        String query = "insert into artikel (v_artikelname, v_bezeichnung, n_preis, n_meinge) values ('" +
                 artikel.getArtikelname() + "', '" +
                 artikel.getBezeichnung() + "', '" +
                 artikel.getPreis() + "', '" +
@@ -108,11 +108,11 @@ public class DBHandler {
     // --- Bestellung
 
     public int createBestellungTable() {
-        return this.tryRunUpdateQuery("create table if not exists bestellung (id mediumint not null auto_increment(), person_id mediumint, datum date, status varchar(256), primary key (id), foreign key (person_id) references person(id))");
+        return this.tryRunUpdateQuery("create table if not exists bestellung (pn_id mediumint not null auto_increment(), n_personid_fk mediumint, d_datum date, v_status varchar(256), primary key (pn_id), foreign key (n_personid_fk) references person(pn_id))");
     }
 
     public int insertNewBestellung(Bestellung bestellung) {
-        String query = "insert into bestellung (person_id, date, status) values ('" +
+        String query = "insert into bestellung (n_personid_fk, d_date, v_status) values ('" +
                 bestellung.getPerson().getId() + "', '" +
                 bestellung.getDate() + "', '" +
                 bestellung.getState() + "')";
@@ -130,11 +130,11 @@ public class DBHandler {
     // --- Auslieferung
 
     public int createAuslieferungTable() {
-        return this.tryRunUpdateQuery("create table if not exists auslieferung (id mediumint not null auto_increment(), person_id mediumint, bestellung_id mediumint, primary key (id), foreign key (person_id) references person(id), foreign key (bestellung_id) references bestellung(id))");
+        return this.tryRunUpdateQuery("create table if not exists auslieferung (pn_id mediumint not null auto_increment(), n_personid_fk mediumint, n_bestellungid_fk mediumint, primary key (pn_id), foreign key (n_personid_fk) references person(pn_id), foreign key (n_bestellungid_fk) references bestellung(pn_id))");
     }
 
     public int insertNewAuslieferung(Auslieferung auslieferung) {
-        String query = "insert into auslieferung (person_id, bestellung_id) values ('" +
+        String query = "insert into auslieferung (n_personid_fk, n_bestellungid_fk) values ('" +
                 auslieferung.getPerson().getId() + "', '" +
                 auslieferung.getBestellung().getId() + "')";
         return this.tryRunUpdateQuery(query);
@@ -151,7 +151,7 @@ public class DBHandler {
     // --- Bestellzuordnung
 
     public int createBestellzuordnungTable() {
-        return this.tryRunUpdateQuery("create table if not exists bestellzuordnung (pn_id mediumint not null auto_increment, n_bestellungid_fk mediumint, n_artikelid_fk mediumint, n_menge integer, primary key(pn_id), foreign key(n_bestellungid_fk) references bestellung(id), foreign key(n_artikel_fk) references artikel(id))");
+        return this.tryRunUpdateQuery("create table if not exists bestellzuordnung (pn_id mediumint not null auto_increment, n_bestellungid_fk mediumint, n_artikelid_fk mediumint, n_menge integer, primary key(pn_id), foreign key(n_bestellungid_fk) references bestellung(pn_id), foreign key(n_artikel_fk) references artikel(pn_id))");
     }
 
     public int insertNewBestellzuordnung(Bestellzuordnung bestellzuordnung) {
