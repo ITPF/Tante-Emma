@@ -4,7 +4,7 @@ import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.fia51.tanteemma.connectors.JDBCConnector;
-import org.fia51.tanteemma.models.User;
+import org.fia51.tanteemma.models.Person;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -30,8 +30,8 @@ public class AppTest {
         JDBCConnector jdbc = new JDBCConnector(config.getString("jdbc.url"), config.getString("jdbc.driver"), config.getString("jdbc.user"), config.getString("jdbc.password"));
         try {
             jdbc.connect();
-            User newUser = jdbc.runQuery("select * from user where name =?", "Igor");
-            System.out.println("User: " + newUser.getName());
+            Person newUser = jdbc.runQuery("select * from user where name =?", "Igor");
+            System.out.println("Person: " + newUser.getName());
         } catch (SQLException e) {
             e.printStackTrace();
         }
