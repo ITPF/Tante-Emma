@@ -1,4 +1,4 @@
-package org.fia51.tanteemma.configuration;
+package org.itpf.tanteemma.configuration;
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;

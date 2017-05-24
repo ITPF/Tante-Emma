@@ -1,4 +1,4 @@
-package org.fia51.tanteemma.dao;
+package org.itpf.tanteemma.dao;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;

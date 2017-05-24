@@ -1,4 +1,4 @@
-package org.fia51.tanteemma.dao;
+package org.itpf.tanteemma.dao;
 
 import java.sql.SQLException;
 

@@ -1,9 +1,9 @@
-package org.fia51.tanteemma.handler;
+package org.itpf.tanteemma.handler;
 
-import org.fia51.tanteemma.configuration.PropertiesConfig;
-import org.fia51.tanteemma.dao.DbDao;
-import org.fia51.tanteemma.dao.DbDaoImplJdbc;
-import org.fia51.tanteemma.models.Person;
+import org.itpf.tanteemma.configuration.PropertiesConfig;
+import org.itpf.tanteemma.dao.DbDao;
+import org.itpf.tanteemma.dao.DbDaoImplJdbc;
+import org.itpf.tanteemma.models.Person;
 
 import java.sql.SQLException;
 import java.util.List;

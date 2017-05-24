@@ -1,4 +1,4 @@
-package org.fia51.tanteemma.models;
+package org.itpf.tanteemma.models;
 
 /**
  * Created by ffigorstoljarow on 24.05.2017.

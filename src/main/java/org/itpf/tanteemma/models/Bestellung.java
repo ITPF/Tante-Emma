@@ -1,4 +1,4 @@
-package org.fia51.tanteemma.models;
+package org.itpf.tanteemma.models;
 
 import java.sql.Date;
 
