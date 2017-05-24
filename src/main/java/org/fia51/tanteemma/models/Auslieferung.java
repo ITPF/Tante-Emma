@@ -4,12 +4,12 @@ package org.fia51.tanteemma.models;
  * Created by ffigorstoljarow on 24.05.2017.
  */
 public class Auslieferung {
-    private long auslieferungid;
+    private long id;
     private Person person;
     private Bestellung bestellung;
 
     public Auslieferung(long auslieferungid, Person person, Bestellung bestellung) {
-        this.auslieferungid = auslieferungid;
+        this.id = auslieferungid;
         this.person = person;
         this.bestellung = bestellung;
     }
@@ -17,12 +17,12 @@ public class Auslieferung {
     public Auslieferung() {
     }
 
-    public long getAuslieferungid() {
-        return auslieferungid;
+    public long getId() {
+        return id;
     }
 
-    public void setAuslieferungid(long auslieferungid) {
-        this.auslieferungid = auslieferungid;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Person getPerson() {

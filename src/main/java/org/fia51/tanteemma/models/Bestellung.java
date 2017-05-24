@@ -6,13 +6,13 @@ import java.sql.Date;
  * Created by ffigorstoljarow on 24.05.2017.
  */
 public class Bestellung {
-    private long bestellid;
+    private long id;
     private Person person;
     private Date datum;
     private String status;
 
     public Bestellung(long bestellid, Person person, Date datum, String status) {
-        this.bestellid = bestellid;
+        this.id = bestellid;
         this.person = person;
         this.datum = datum;
         this.status = status;
@@ -21,12 +21,12 @@ public class Bestellung {
     public Bestellung() {
     }
 
-    public long getBestellid() {
-        return bestellid;
+    public long getId() {
+        return id;
     }
 
-    public void setBestellid(long bestellid) {
-        this.bestellid = bestellid;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Person getPerson() {
@@ -52,6 +52,7 @@ public class Bestellung {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }
 
 

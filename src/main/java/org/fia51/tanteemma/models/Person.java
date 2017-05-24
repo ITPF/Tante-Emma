@@ -3,8 +3,8 @@ package org.fia51.tanteemma.models;
 /**
  * Created by ffigorstoljarow on 17.05.2017.
  */
-public class Person implements Dao{
-    private long personid;
+public class Person {
+    private long id;
     private String name;
     private String vorname;
     private String geschlecht;
@@ -13,7 +13,7 @@ public class Person implements Dao{
     private String rolle;
 
     public Person(long personid, String name, String vorname, String geschlecht, String telefon, String email, String rolle) {
-        this.personid = personid;
+        this.id = personid;
         this.name = name;
         this.vorname = vorname;
         this.geschlecht = geschlecht;
@@ -25,12 +25,12 @@ public class Person implements Dao{
     public Person() {
     }
 
-    public long getPersonid() {
-        return personid;
+    public long getId() {
+        return id;
     }
 
-    public void setPersonid(long personid) {
-        this.personid = personid;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -79,13 +79,5 @@ public class Person implements Dao{
 
     public void setRolle(String rolle) {
         this.rolle = rolle;
-    }
-
-    public String getCreateQuery() {
-        return null;
-    }
-
-    public String getDeleteQuery() {
-        return null;
     }
 }
