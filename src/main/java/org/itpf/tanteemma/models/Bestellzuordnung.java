@@ -4,6 +4,7 @@ package org.itpf.tanteemma.models;
  * Created by ffigorstoljarow on 24.05.2017.
  */
 public class Bestellzuordnung {
+    private long id;
     private Bestellung bestellung;
     private Artikel artikel;
     private int menge;
@@ -11,7 +12,8 @@ public class Bestellzuordnung {
     public Bestellzuordnung() {
     }
 
-    public Bestellzuordnung(Bestellung bestellung, Artikel artikel, int menge) {
+    public Bestellzuordnung(long id, Bestellung bestellung, Artikel artikel, int menge) {
+        this.id = id;
         this.bestellung = bestellung;
         this.artikel = artikel;
         this.menge = menge;
@@ -39,5 +41,13 @@ public class Bestellzuordnung {
 
     public void setMenge(int menge) {
         this.menge = menge;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

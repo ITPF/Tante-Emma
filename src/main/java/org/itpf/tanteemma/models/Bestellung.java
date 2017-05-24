@@ -8,14 +8,14 @@ import java.sql.Date;
 public class Bestellung {
     private long id;
     private Person person;
-    private Date datum;
-    private String status;
+    private Date date;
+    private String state;
 
-    public Bestellung(long bestellid, Person person, Date datum, String status) {
-        this.id = bestellid;
+    public Bestellung(long id, Person person, Date date, String state) {
+        this.id = id;
         this.person = person;
-        this.datum = datum;
-        this.status = status;
+        this.date = date;
+        this.state = state;
     }
 
     public Bestellung() {
@@ -37,20 +37,20 @@ public class Bestellung {
         this.person = person;
     }
 
-    public Date getDatum() {
-        return datum;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDatum(Date datum) {
-        this.datum = datum;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public String getStatus() {
-        return status;
+    public String getState() {
+        return state;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setState(String state) {
+        this.state = state;
     }
 
 }
