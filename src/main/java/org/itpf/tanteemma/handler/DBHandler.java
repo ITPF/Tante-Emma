@@ -18,7 +18,8 @@ public class DBHandler {
         dbDao = new DbDaoImplJdbc();
         PropertiesConfig config = new PropertiesConfig();
         try {
-            dbDao.setConnection(config.get("jdbc.url"), config.get("jdbc.driver"), config.get("jdbc.user"), config.get("jdbc.password"));
+            dbDao.setConnection(config.get("jdbc.url") + config.get("jdbc.database"), config.get("jdbc.driver"), config.get("jdbc.user"), config.get("jdbc.password"));
+            //this.createDatabase(config.get("jdbc.database"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,10 +53,30 @@ public class DBHandler {
         return rowsUpdated;
     }
 
+    public int dropAlltables() {
+        int updatedRows = 0;
+        updatedRows += this.dropTable("bestellzuordnung");
+        updatedRows += this.dropTable("artikel");
+        updatedRows += this.dropTable("auslieferung");
+        updatedRows += this.dropTable("bestellung");
+        updatedRows += this.dropTable("person");
+        return updatedRows;
+    }
+
+    public int createAllTables() {
+        int updatedRows = 0;
+        updatedRows += this.createPersonTable();
+        updatedRows += this.createBestellungTable();
+        updatedRows += this.createAuslieferungTable();
+        updatedRows += this.createArtikelTable();
+        updatedRows += this.createBestellzuordnungTable();
+        return updatedRows;
+    }
+
     // --- PERSON
 
     public int createPersonTable() {
-        return tryRunUpdateQuery("create table if not exists person (pn_id mediumint not null auto_increment(), v_name varchar(256), v_vorname varchar(256), v_geschlecht varchar(256), v_telefon varchar(256), v_email varchar(256), v_rolle varchar(256), primary key (pn_id))");
+        return tryRunUpdateQuery("create table if not exists person (pn_id mediumint not null auto_increment(), v_name varchar(256), v_vorname varchar(256), v_geschlecht varchar(256), v_telefon varchar(256), v_email varchar(256), v_rolle varchar(256), v_strasse varchar(256), v_ort varchar(256), v_plz varchar(256) primary key (pn_id))");
 
     }
 
@@ -70,14 +91,16 @@ public class DBHandler {
 
     public int insertNewPerson(Person person) {
         int rowsUpdated = createPersonTable();
-        String query = "insert into person (v_name, v_vorname, v_geschlecht, v_telefon, v_email, v_rolle) values ('"
+        String query = "insert into person (v_name, v_vorname, v_geschlecht, v_telefon, v_email, v_rolle, v_strasse, v_ort, v_plz) values ('"
                 + person.getName() + "', '"
                 + person.getVorname() + "', '"
                 + person.getGeschlecht() + "', '"
                 + person.getTelefon() + "', '"
                 + person.getEmail() + "', '"
-                + person.getRolle() + "')";
-
+                + person.getRolle() + "', '"
+                + person.getStrasse() + "', '"
+                + person.getOrt() + "', '"
+                + person.getPlz() + "');";
         tryRunUpdateQuery(query);
         return rowsUpdated;
     }
@@ -85,7 +108,7 @@ public class DBHandler {
     // --- Artikel
 
     public int createArtikelTable() {
-        return tryRunUpdateQuery("create table if not exists artikel (pn_id mediumint not null auto_increment(), v_artikelname varchar(256), v_bezeichnung varchar(256), n_preis integer, n_menge integer, primary key (pn_id))");
+        return tryRunUpdateQuery("create table if not exists artikel (pn_id mediumint not null auto_increment(), v_artikelname varchar(256), v_bezeichnung varchar(256), n_preis double, n_menge integer, primary key (pn_id))");
     }
 
     public int insertNewArtikel(Artikel artikel) {
@@ -169,4 +192,9 @@ public class DBHandler {
         return updatedRows;
     }
 
+    // --- else
+
+    public void createDatabase(String dbName) {
+        this.tryRunUpdateQuery("create database if not exists " + dbName + ";");
+    }
 }

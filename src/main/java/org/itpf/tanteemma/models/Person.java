@@ -11,8 +11,11 @@ public class Person {
     private String telefon;
     private String email;
     private String rolle;
+    private String strasse;
+    private String ort;
+    private String plz;
 
-    public Person(long personid, String name, String vorname, String geschlecht, String telefon, String email, String rolle) {
+    public Person(long personid, String name, String vorname, String geschlecht, String telefon, String email, String rolle, String strasse, String ort, String plz) {
         this.id = personid;
         this.name = name;
         this.vorname = vorname;
@@ -20,6 +23,33 @@ public class Person {
         this.telefon = telefon;
         this.email = email;
         this.rolle = rolle;
+        this.strasse = strasse;
+        this.ort = ort;
+        this.plz = plz;
+    }
+
+    public String getStrasse() {
+        return strasse;
+    }
+
+    public void setStrasse(String strasse) {
+        this.strasse = strasse;
+    }
+
+    public String getOrt() {
+        return ort;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
+
+    public String getPlz() {
+        return plz;
+    }
+
+    public void setPlz(String plz) {
+        this.plz = plz;
     }
 
     public Person() {

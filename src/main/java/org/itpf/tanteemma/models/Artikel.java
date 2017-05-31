@@ -7,13 +7,13 @@ public class Artikel {
     private long id;
     private String artikelname;
     private String bezeichnung;
-    private int preis;
+    private double preis;
     private int menge;
 
     public Artikel() {
     }
 
-    public Artikel(long id, String artikelname, String bezeichnung, int preis, int menge) {
+    public Artikel(long id, String artikelname, String bezeichnung, double preis, int menge) {
         this.id = id;
         this.artikelname = artikelname;
         this.bezeichnung = bezeichnung;
@@ -45,11 +45,11 @@ public class Artikel {
         this.bezeichnung = bezeichnung;
     }
 
-    public int getPreis() {
+    public double getPreis() {
         return preis;
     }
 
-    public void setPreis(int preis) {
+    public void setPreis(double preis) {
         this.preis = preis;
     }
 

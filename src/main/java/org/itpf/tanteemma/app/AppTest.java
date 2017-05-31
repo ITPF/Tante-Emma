@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.itpf.tanteemma.filler.DBFiller;
 
 /**
  * Created by ffigorstoljarow on 17.05.2017.
@@ -23,6 +24,7 @@ public class AppTest {
     }
 
     public void run() {
-       
+        DBFiller filler = new DBFiller();
+        filler.emptyDBAndFillWithJunk();
     }
 }
