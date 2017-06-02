@@ -4,6 +4,8 @@
 	<groupId>org.itpf</groupId>
 	<artifactId>tante-emma</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
 	<build>
 		<plugins>
 			<plugin>

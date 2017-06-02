@@ -7,6 +7,7 @@ import com.vaadin.ui.*;
 /**
  * Created by Patrick on 01.06.2017.
  */
+
 @Title("Tante Emma Laden")
 public class EntryPoint extends UI {
 
