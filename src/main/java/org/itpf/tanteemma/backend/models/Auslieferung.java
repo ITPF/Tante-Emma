@@ -1,4 +1,6 @@
-package org.itpf.tanteemma.models;
+package org.itpf.tanteemma.backend.models;
+
+import java.sql.Date;
 
 /**
  * Created by ffigorstoljarow on 24.05.2017.
@@ -7,11 +9,13 @@ public class Auslieferung {
     private long id;
     private Person person;
     private Bestellung bestellung;
+    private Date erstellt;
 
-    public Auslieferung(long auslieferungid, Person person, Bestellung bestellung) {
+    public Auslieferung(long auslieferungid, Person person, Bestellung bestellung, Date erstellt) {
         this.id = auslieferungid;
         this.person = person;
         this.bestellung = bestellung;
+        this.erstellt = erstellt;
     }
 
     public Auslieferung() {
@@ -39,5 +43,13 @@ public class Auslieferung {
 
     public void setBestellung(Bestellung bestellung) {
         this.bestellung = bestellung;
+    }
+
+    public Date getErstellt() {
+        return erstellt;
+    }
+
+    public void setErstellt(Date erstellt) {
+        this.erstellt = erstellt;
     }
 }

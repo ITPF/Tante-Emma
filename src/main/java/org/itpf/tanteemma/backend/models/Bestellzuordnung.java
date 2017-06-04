@@ -1,4 +1,6 @@
-package org.itpf.tanteemma.models;
+package org.itpf.tanteemma.backend.models;
+
+import org.itpf.tanteemma.backend.models.internal.BestellzuordnungIntern;
 
 /**
  * Created by ffigorstoljarow on 24.05.2017.

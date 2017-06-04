@@ -1,4 +1,4 @@
-package org.itpf.tanteemma.configuration;
+package org.itpf.tanteemma.backend.configuration;
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;

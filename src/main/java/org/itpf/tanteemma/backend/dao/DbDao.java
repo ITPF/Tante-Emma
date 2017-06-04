@@ -1,4 +1,4 @@
-package org.itpf.tanteemma.dao;
+package org.itpf.tanteemma.backend.dao;
 
 import java.sql.SQLException;
 import java.util.List;

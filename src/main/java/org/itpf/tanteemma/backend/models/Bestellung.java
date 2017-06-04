@@ -1,4 +1,4 @@
-package org.itpf.tanteemma.models;
+package org.itpf.tanteemma.backend.models;
 
 import java.sql.Date;
 
@@ -9,6 +9,10 @@ public class Bestellung {
     private long id;
     private Person person;
     private Date date;
+    /**
+     * TODO: add private Time time or formatting date after datetime
+     * Currently users can't order multiple time a day.
+     */
     private String state;
 
     public Bestellung(long id, Person person, Date date, String state) {

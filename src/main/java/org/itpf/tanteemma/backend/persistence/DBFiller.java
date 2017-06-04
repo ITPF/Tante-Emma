@@ -1,9 +1,9 @@
-package org.itpf.tanteemma.persistence;
+package org.itpf.tanteemma.backend.persistence;
 
-import org.itpf.tanteemma.configuration.PropertiesConfig;
-import org.itpf.tanteemma.handler.DBHandler;
-import org.itpf.tanteemma.models.Artikel;
-import org.itpf.tanteemma.models.Person;
+import org.itpf.tanteemma.backend.configuration.PropertiesConfig;
+import org.itpf.tanteemma.backend.handler.DBHandler;
+import org.itpf.tanteemma.backend.models.Artikel;
+import org.itpf.tanteemma.backend.models.Person;
 
 /**
  * Created by ffigorstoljarow on 24.05.2017.
