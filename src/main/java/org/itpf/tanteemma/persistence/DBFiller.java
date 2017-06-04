@@ -7,6 +7,7 @@ import org.itpf.tanteemma.models.Person;
 
 /**
  * Created by ffigorstoljarow on 24.05.2017.
+ * Fills the database with some entities. USed for the first initialization.
  */
 public class DBFiller {
     private DBHandler dbHandler;
@@ -19,7 +20,7 @@ public class DBFiller {
 
     public void emptyDBAndFillWithJunk() {
         int updatedRows = 0;
-        //dbHandler.createDatabase(conf.get("jdbc.database"));
+
         updatedRows += dbHandler.dropAlltables();
         updatedRows += dbHandler.createAllTables();
 

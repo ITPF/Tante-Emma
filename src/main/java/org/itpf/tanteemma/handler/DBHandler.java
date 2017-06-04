@@ -10,7 +10,9 @@ import java.util.List;
 
 /**
  * Created by ffigorstoljarow on 23.05.2017.
+ * Handles all the I/O between DAO and this application.
  */
+@SuppressWarnings("synthetic-access")
 public class DBHandler {
     private DbDao dbDao;
 
@@ -18,8 +20,17 @@ public class DBHandler {
         dbDao = new DbDaoImplJdbc();
         PropertiesConfig config = new PropertiesConfig();
         try {
-            dbDao.setConnection(config.get("jdbc.url") + config.get("jdbc.database"), config.get("jdbc.driver"), config.get("jdbc.user"), config.get("jdbc.password"));
-            //this.createDatabase(config.get("jdbc.database"));
+            // first connect without database name, to create one if not exists
+            dbDao.setConnection(config.get("jdbc.url"), config.get("jdbc.driver"), config.get("jdbc.user"), config.get("jdbc.password"));
+            this.createDatabase(config.get("jdbc.database"));
+            // now reset connection to use the created databasename
+            String url = config.get("jdbc.url");
+            if(url.endsWith("/")) {
+                url += config.get("jdbc.database");
+            } else {
+                url += "/" + config.get("jdbc.database");
+            }
+            dbDao.setConnection(url, config.get("jdbc.driver"), config.get("jdbc.user"), config.get("jdbc.password"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

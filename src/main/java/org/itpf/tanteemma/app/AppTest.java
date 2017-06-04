@@ -9,7 +9,9 @@ import org.itpf.tanteemma.persistence.DBFiller;
 
 /**
  * Created by ffigorstoljarow on 17.05.2017.
+ * Used for some test runs etc.
  */
+@SuppressWarnings("synthetic-access")
 public class AppTest {
     Configurations configs;
     Configuration config;
