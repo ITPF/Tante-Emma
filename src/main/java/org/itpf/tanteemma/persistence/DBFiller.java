@@ -1,4 +1,4 @@
-package org.itpf.tanteemma.filler;
+package org.itpf.tanteemma.persistence;
 
 import org.itpf.tanteemma.configuration.PropertiesConfig;
 import org.itpf.tanteemma.handler.DBHandler;

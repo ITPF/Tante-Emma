@@ -76,7 +76,7 @@ public class DBHandler {
     // --- PERSON
 
     public int createPersonTable() {
-        return tryRunUpdateQuery("create table if not exists person (pn_id mediumint not null auto_increment(), v_name varchar(256), v_vorname varchar(256), v_geschlecht varchar(256), v_telefon varchar(256), v_email varchar(256), v_rolle varchar(256), v_strasse varchar(256), v_ort varchar(256), v_plz varchar(256) primary key (pn_id))");
+        return tryRunUpdateQuery("create table if not exists person (pn_id mediumint not null auto_increment, v_name varchar(256), v_vorname varchar(256), v_geschlecht varchar(256), v_telefon varchar(256), v_email varchar(256), v_rolle varchar(256), v_strasse varchar(256), v_ort varchar(256), v_plz varchar(256), primary key (pn_id))");
 
     }
 
@@ -108,11 +108,11 @@ public class DBHandler {
     // --- Artikel
 
     public int createArtikelTable() {
-        return tryRunUpdateQuery("create table if not exists artikel (pn_id mediumint not null auto_increment(), v_artikelname varchar(256), v_bezeichnung varchar(256), n_preis double, n_menge integer, primary key (pn_id))");
+        return tryRunUpdateQuery("create table if not exists artikel (pn_id mediumint not null auto_increment, v_artikelname varchar(256), v_bezeichnung varchar(256), n_preis double, n_menge integer, primary key (pn_id))");
     }
 
     public int insertNewArtikel(Artikel artikel) {
-        String query = "insert into artikel (v_artikelname, v_bezeichnung, n_preis, n_meinge) values ('" +
+        String query = "insert into artikel (v_artikelname, v_bezeichnung, n_preis, n_menge) values ('" +
                 artikel.getArtikelname() + "', '" +
                 artikel.getBezeichnung() + "', '" +
                 artikel.getPreis() + "', '" +
@@ -131,7 +131,7 @@ public class DBHandler {
     // --- Bestellung
 
     public int createBestellungTable() {
-        return this.tryRunUpdateQuery("create table if not exists bestellung (pn_id mediumint not null auto_increment(), n_personid_fk mediumint, d_datum date, v_status varchar(256), primary key (pn_id), foreign key (n_personid_fk) references person(pn_id))");
+        return this.tryRunUpdateQuery("create table if not exists bestellung (pn_id mediumint not null auto_increment, n_personid_fk mediumint, d_datum date, v_status varchar(256), primary key (pn_id), foreign key (n_personid_fk) references person(pn_id))");
     }
 
     public int insertNewBestellung(Bestellung bestellung) {
@@ -153,7 +153,7 @@ public class DBHandler {
     // --- Auslieferung
 
     public int createAuslieferungTable() {
-        return this.tryRunUpdateQuery("create table if not exists auslieferung (pn_id mediumint not null auto_increment(), n_personid_fk mediumint, n_bestellungid_fk mediumint, primary key (pn_id), foreign key (n_personid_fk) references person(pn_id), foreign key (n_bestellungid_fk) references bestellung(pn_id))");
+        return this.tryRunUpdateQuery("create table if not exists auslieferung (pn_id mediumint not null auto_increment, n_personid_fk mediumint, n_bestellungid_fk mediumint, primary key (pn_id), foreign key (n_personid_fk) references person(pn_id), foreign key (n_bestellungid_fk) references bestellung(pn_id))");
     }
 
     public int insertNewAuslieferung(Auslieferung auslieferung) {
@@ -174,7 +174,7 @@ public class DBHandler {
     // --- Bestellzuordnung
 
     public int createBestellzuordnungTable() {
-        return this.tryRunUpdateQuery("create table if not exists bestellzuordnung (pn_id mediumint not null auto_increment, n_bestellungid_fk mediumint, n_artikelid_fk mediumint, n_menge integer, primary key(pn_id), foreign key(n_bestellungid_fk) references bestellung(pn_id), foreign key(n_artikel_fk) references artikel(pn_id))");
+        return this.tryRunUpdateQuery("create table if not exists bestellzuordnung (pn_id mediumint not null auto_increment, n_bestellungid_fk mediumint, n_artikelid_fk mediumint, n_menge integer, primary key(pn_id), foreign key(n_bestellungid_fk) references bestellung(pn_id), foreign key(n_artikelid_fk) references artikel(pn_id))");
     }
 
     public int insertNewBestellzuordnung(Bestellzuordnung bestellzuordnung) {
