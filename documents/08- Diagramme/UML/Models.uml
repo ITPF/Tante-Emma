@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.itpf.tanteemma.backend.services.OrderService</OriginalElement>
+  <nodes>
+    <node x="-197.5" y="131.75">org.itpf.tanteemma.backend.models.internal.BestellungIntern</node>
+    <node x="260.5" y="490.0">org.itpf.tanteemma.backend.models.Bestellzuordnung</node>
+    <node x="-198.75" y="263.0">org.itpf.tanteemma.backend.models.internal.BestellzuordnungIntern</node>
+    <node x="321.75" y="300.0">org.itpf.tanteemma.backend.models.Artikel</node>
+    <node x="0.0" y="0.0">org.itpf.tanteemma.backend.models.Person</node>
+    <node x="139.75" y="311.0">org.itpf.tanteemma.backend.models.Bestellung</node>
+    <node x="-198.25" y="1.25">org.itpf.tanteemma.backend.models.internal.AuslieferungIntern</node>
+    <node x="48.75" y="490.0">org.itpf.tanteemma.backend.models.Auslieferung</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.itpf.tanteemma.backend.models.Bestellung" target="org.itpf.tanteemma.backend.models.Person">
+      <point x="0.0" y="-59.0" />
+      <point x="220.75" y="275.0" />
+      <point x="225.0" y="275.0" />
+      <point x="75.0" y="125.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.models.Bestellzuordnung" target="org.itpf.tanteemma.backend.models.Bestellung">
+      <point x="-40.5" y="-59.0" />
+      <point x="301.0" y="465.0" />
+      <point x="261.25" y="465.0" />
+      <point x="40.5" y="59.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.models.Bestellzuordnung" target="org.itpf.tanteemma.backend.models.Artikel">
+      <point x="40.5" y="-59.0" />
+      <point x="382.0" y="465.0" />
+      <point x="421.75" y="465.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.models.Auslieferung" target="org.itpf.tanteemma.backend.models.Person">
+      <point x="-40.5" y="-59.0" />
+      <point x="89.25" y="465.0" />
+      <point x="104.25" y="465.0" />
+      <point x="104.25" y="275.0" />
+      <point x="75.0" y="275.0" />
+      <point x="-75.0" y="125.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.models.Auslieferung" target="org.itpf.tanteemma.backend.models.Bestellung">
+      <point x="40.5" y="-59.0" />
+      <point x="170.25" y="465.0" />
+      <point x="180.25" y="465.0" />
+      <point x="-40.5" y="59.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8" x="333.75" y="304.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

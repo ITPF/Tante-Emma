@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.itpf.tanteemma.backend.services.OrderService</OriginalElement>
+  <nodes>
+    <node x="0.0" y="528.0">org.itpf.tanteemma.backend.persistence.DBFiller</node>
+    <node x="358.0" y="275.0">org.itpf.tanteemma.backend.services.PersonService</node>
+    <node x="0.0" y="275.0">org.itpf.tanteemma.backend.services.DeliveryService</node>
+    <node x="0.0" y="0.0">org.itpf.tanteemma.backend.services.OrderService</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.8" x="333.75" y="304.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

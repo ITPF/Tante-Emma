@@ -12,6 +12,7 @@ import org.itpf.tanteemma.backend.models.Auslieferung;
 import org.itpf.tanteemma.backend.models.Bestellung;
 import org.itpf.tanteemma.backend.models.Person;
 import org.itpf.tanteemma.backend.persistence.DBFiller;
+import org.itpf.tanteemma.backend.services.DeliveryService;
 import org.itpf.tanteemma.backend.services.OrderService;
 import org.itpf.tanteemma.backend.services.PersonService;
 
@@ -19,11 +20,11 @@ import org.itpf.tanteemma.backend.services.PersonService;
  * Used for some test runs etc.
  */
 @SuppressWarnings("synthetic-access")
-public class AppTest {
+public class App {
     Configurations configs;
     Configuration config;
 
-    public AppTest() {
+    public App() {
         configs = new Configurations();
         try {
             config = configs.properties(new File("src/main/resources/application.properties"));
@@ -33,11 +34,13 @@ public class AppTest {
     }
 
     public void run() {
-        DBFiller filler = new DBFiller();
+        DBHandler dbHandler = new DBHandler();
+        DBFiller filler = new DBFiller(dbHandler);
+        DeliveryService deliveryService = new DeliveryService(dbHandler);
         filler.emptyDBAndFillWithJunk();
 
-        OrderService orderService = new OrderService();
-        PersonService personService = new PersonService();
+        OrderService orderService = new OrderService(dbHandler);
+        PersonService personService = new PersonService(dbHandler);
         Person igor = personService.findPersonsByName("Igor", "Stoljarow");
         Bestellung igorsBestellung = orderService.createNewBestelung(igor);
         orderService.addArtikelToBestellung(igorsBestellung, "Klopapier", 10);

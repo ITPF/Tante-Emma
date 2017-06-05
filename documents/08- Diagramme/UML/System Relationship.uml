@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.itpf.tanteemma.backend.services.OrderService</OriginalElement>
+  <nodes>
+    <node x="198.75" y="80.0">org.itpf.tanteemma.backend.dao.DbDaoImplJdbc</node>
+    <node x="256.0" y="0.0">org.itpf.tanteemma.backend.dao.DbDao</node>
+    <node x="133.0" y="240.0">org.itpf.tanteemma.backend.persistence.DBFiller</node>
+    <node x="238.0" y="240.0">org.itpf.tanteemma.backend.services.PersonService</node>
+    <node x="266.54999999999995" y="320.0">org.itpf.tanteemma.app.App</node>
+    <node x="247.0" y="160.0">org.itpf.tanteemma.backend.handler.DBHandler</node>
+    <node x="376.0" y="240.0">org.itpf.tanteemma.backend.services.DeliveryService</node>
+    <node x="0.0" y="240.0">org.itpf.tanteemma.backend.services.OrderService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.itpf.tanteemma.app.App" target="org.itpf.tanteemma.backend.services.OrderService">
+      <point x="-27.599999999999966" y="-15.0" />
+      <point x="273.45000000000005" y="300.0" />
+      <point x="56.5" y="300.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.services.OrderService" target="org.itpf.tanteemma.backend.handler.DBHandler">
+      <point x="0.0" y="-15.0" />
+      <point x="56.5" y="210.0" />
+      <point x="257.0" y="210.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.dao.DbDaoImplJdbc" target="org.itpf.tanteemma.backend.dao.DbDao">
+      <point x="0.0" y="-15.0" />
+      <point x="260.75" y="55.0" />
+      <point x="276.5" y="55.0" />
+      <point x="-20.5" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.app.App" target="org.itpf.tanteemma.backend.persistence.DBFiller">
+      <point x="-13.800000000000011" y="-15.0" />
+      <point x="287.25" y="290.0" />
+      <point x="175.5" y="290.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.services.PersonService" target="org.itpf.tanteemma.backend.handler.DBHandler">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.app.App" target="org.itpf.tanteemma.backend.services.PersonService">
+      <point x="0.0" y="-15.0" />
+      <point x="301.04999999999995" y="300.0" />
+      <point x="297.0" y="300.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.persistence.DBFiller" target="org.itpf.tanteemma.backend.handler.DBHandler">
+      <point x="0.0" y="-15.0" />
+      <point x="175.5" y="220.0" />
+      <point x="277.0" y="220.0" />
+      <point x="-20.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.handler.DBHandler" target="org.itpf.tanteemma.backend.dao.DbDaoImplJdbc">
+      <point x="-25.0" y="-15.0" />
+      <point x="272.0" y="135.0" />
+      <point x="260.75" y="135.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.app.App" target="org.itpf.tanteemma.backend.handler.DBHandler">
+      <point x="27.600000000000023" y="-15.0" />
+      <point x="328.65" y="300.0" />
+      <point x="510.5" y="300.0" />
+      <point x="510.5" y="210.0" />
+      <point x="337.0" y="210.0" />
+      <point x="40.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.handler.DBHandler" target="org.itpf.tanteemma.backend.dao.DbDao">
+      <point x="25.0" y="-15.0" />
+      <point x="322.0" y="135.0" />
+      <point x="333.25" y="135.0" />
+      <point x="333.25" y="55.0" />
+      <point x="317.5" y="55.0" />
+      <point x="20.5" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.app.App" target="org.itpf.tanteemma.backend.services.DeliveryService">
+      <point x="13.800000000000011" y="-15.0" />
+      <point x="314.85" y="290.0" />
+      <point x="438.0" y="290.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.itpf.tanteemma.backend.services.DeliveryService" target="org.itpf.tanteemma.backend.handler.DBHandler">
+      <point x="0.0" y="-15.0" />
+      <point x="438.0" y="220.0" />
+      <point x="317.0" y="220.0" />
+      <point x="20.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.2000000000000002" x="388.16666666666663" y="180.33333333333331" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

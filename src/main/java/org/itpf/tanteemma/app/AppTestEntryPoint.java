@@ -5,7 +5,7 @@ package org.itpf.tanteemma.app;
  */
 public class AppTestEntryPoint {
     public static void main(String[] args) {
-        AppTest test = new AppTest();
+        App test = new App();
         test.run();
     }
 }

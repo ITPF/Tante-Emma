@@ -13,11 +13,6 @@ public class DBFiller {
     private DBHandler dbHandler;
     private PropertiesConfig conf;
 
-    public DBFiller() {
-        dbHandler = new DBHandler();
-        conf = new PropertiesConfig();
-    }
-
     public DBFiller(DBHandler dbHandler) {
         this.dbHandler = dbHandler;
         conf = new PropertiesConfig();
