@@ -91,6 +91,13 @@ public class ServiceTest {
 
         Auslieferung igorsAuslieferung = orderService.orderBestellung(igorsBestellung);
         assertNotNull("Igor's Auslieferung shouldn't be null", igorsAuslieferung);
+
+        List<Auslieferung> openDeliveries = deliveryService.findAllReadyDeliveries();
+        assertTrue("There should be at least one ready delivery", openDeliveries.size() > 0);
+        assertNotNull("The delivery has a deliverer", openDeliveries.get(0).getPerson());
+        assertTrue("The deliverer is a valid person", openDeliveries.get(0).getPerson().getPn_id() != 0);
+        assertNotNull("Delivery has an order", openDeliveries.get(0).getBestellung());
+        assertTrue("The order is valid", openDeliveries.get(0).getBestellung().getId() != 0);
     }
 
     @After

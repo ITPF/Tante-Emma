@@ -55,4 +55,8 @@ public class DeliveryService {
         Person person = dbHandler.selectPersonByName(vorname, name);
         return this.findAllOpenDeliveriesByPerson(person);
     }
+
+    public List<Auslieferung> findAllReadyDeliveries() {
+        return dbHandler.selectAllFromAuslieferungByBestellungStatus("ready") ;
+    }
 }
