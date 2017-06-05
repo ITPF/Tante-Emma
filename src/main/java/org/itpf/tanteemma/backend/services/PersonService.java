@@ -15,6 +15,10 @@ public class PersonService {
         this.dbHandler = new DBHandler();
     }
 
+    public PersonService(DBHandler dbHandler) {
+        this.dbHandler = dbHandler;
+    }
+
     public Person createNewPerson(String name, String vorname, String geschlecht, String telefon, String email, String rolle, String strasse, String ort, String plz) {
         Person person = new Person(0, name, vorname, geschlecht, telefon, email, rolle, strasse, ort, plz);
         dbHandler.insertNewPerson(person);

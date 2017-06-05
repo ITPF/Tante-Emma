@@ -19,6 +19,10 @@ public class OrderService {
         this.dbHandler = new DBHandler();
     }
 
+    public OrderService(DBHandler dbHandler) {
+        this.dbHandler = dbHandler;
+    }
+
     /**
      *
      * @param bestellung must exist in db

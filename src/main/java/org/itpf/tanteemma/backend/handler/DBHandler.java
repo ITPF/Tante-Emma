@@ -44,7 +44,7 @@ public class DBHandler {
         try {
             dbDao.setConnection(url, jdbcDriverPath, user, password);
             this.createDatabase(databaseName);
-            String fullUrl = jdbcDriverPath;
+            String fullUrl = url;
             if(fullUrl.endsWith("/")) {
                 fullUrl += databaseName;
             } else {

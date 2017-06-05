@@ -18,6 +18,10 @@ public class DeliveryService {
         this.dbHandler = new DBHandler();
     }
 
+    public DeliveryService(DBHandler dbHandler) {
+        this.dbHandler = dbHandler;
+    }
+
     public List<Auslieferung> findAllOpenDeliveries() {
         return dbHandler.selectAllFromAuslieferungByBestellungStatus("open") ;
     }

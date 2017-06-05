@@ -18,24 +18,25 @@ public class DBFiller {
         conf = new PropertiesConfig();
     }
 
+    public DBFiller(DBHandler dbHandler) {
+        this.dbHandler = dbHandler;
+        conf = new PropertiesConfig();
+    }
+
     public void emptyDBAndFillWithJunk() {
-        int updatedRows = 0;
+        dbHandler.dropAlltables();
+        dbHandler.createAllTables();
 
-        updatedRows += dbHandler.dropAlltables();
-        updatedRows += dbHandler.createAllTables();
+        dbHandler.insertNewPerson(new Person(0, "Neumann", "Filiz", "weiblich", "02133977866", "filiz.neumann@gmail.com", "Mitarbeiter", "Bluemental 1", "Neuss", "41545"));
+        dbHandler.insertNewPerson(new Person(0, "Kraemer", "Tatjana", "weiblich", "02133977654", "tatjana.kraemer@gmail.com", "Mitarbeiter", "Ebertplatz 7", "Köln", "33442"));
+        dbHandler.insertNewPerson(new Person(0, "Lindner", "Patrick", "maennlich", "02133977344", "patrick.lindner@gmail.com", "Mitarbeiter", "Po der Welt 1", "Ewigen", "666"));
+        dbHandler.insertNewPerson(new Person(0, "Lindmann", "Patrick", "maennlich", "02133977666", "lin@web.de", "Kunde", "Weilerstr. 1", "Dormagen", "41540"));
+        dbHandler.insertNewPerson(new Person(0, "Stoljarow", "Igor", "unbekannt", "02144567567", "igor@web.de", "Kunde", "Teuschsweg 666", "Dormagen", "51539"));
 
-        updatedRows += dbHandler.insertNewPerson(new Person(0, "Neumann", "Filiz", "weiblich", "02133977866", "filiz.neumann@gmail.com", "Mitarbeiter", "Bluemental 1", "Neuss", "41545"));
-        updatedRows += dbHandler.insertNewPerson(new Person(0, "Kraemer", "Tatjana", "weiblich", "02133977654", "tatjana.kraemer@gmail.com", "Mitarbeiter", "Ebertplatz 7", "Köln", "33442"));
-        updatedRows += dbHandler.insertNewPerson(new Person(0, "Lindner", "Patrick", "maennlich", "02133977344", "patrick.lindner@gmail.com", "Mitarbeiter", "Po der Welt 1", "Ewigen", "666"));
-        updatedRows += dbHandler.insertNewPerson(new Person(0, "Lindmann", "Patrick", "maennlich", "02133977666", "lin@web.de", "Kunde", "Weilerstr. 1", "Dormagen", "41540"));
-        updatedRows += dbHandler.insertNewPerson(new Person(0, "Stoljarow", "Igor", "unbekannt", "02144567567", "igor@web.de", "Kunde", "Teuschsweg 666", "Dormagen", "51539"));
-
-        updatedRows += dbHandler.insertNewArtikel(new Artikel(0, "Klopapier", "Packung mit 20 Klopapiereinheiten", 3.95, 100));
-        updatedRows += dbHandler.insertNewArtikel(new Artikel(0, "Bananen", "Eine Packung Bananen", 7.99, 50));
-        updatedRows += dbHandler.insertNewArtikel(new Artikel(0, "Aepfel", "Ein Kilo Apfel", 2.99, 30));
-        updatedRows += dbHandler.insertNewArtikel(new Artikel(0, "Gurken", "Ein Kilo Gurken", 2.45, 40));
-        updatedRows += dbHandler.insertNewArtikel(new Artikel(0, "Airways Kaugummi", "Eine Packung Kaugummi", 2.45, 100));
-
-        System.out.println("succ: " + updatedRows);
+        dbHandler.insertNewArtikel(new Artikel(0, "Klopapier", "Packung mit 20 Klopapiereinheiten", 3.95, 100));
+        dbHandler.insertNewArtikel(new Artikel(0, "Bananen", "Eine Packung Bananen", 7.99, 50));
+        dbHandler.insertNewArtikel(new Artikel(0, "Aepfel", "Ein Kilo Apfel", 2.99, 30));
+        dbHandler.insertNewArtikel(new Artikel(0, "Gurken", "Ein Kilo Gurken", 2.45, 40));
+        dbHandler.insertNewArtikel(new Artikel(0, "Airways Kaugummi", "Eine Packung Kaugummi", 2.45, 100));
     }
 }
