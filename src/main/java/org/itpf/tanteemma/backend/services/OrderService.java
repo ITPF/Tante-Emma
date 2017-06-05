@@ -24,7 +24,7 @@ public class OrderService {
     }
 
     /**
-     *
+     * This function links the Artikel to Bestellung and updates the Artikel.menge
      * @param bestellung must exist in db
      * @param artikel must exist in db
      * @param menge can't be greater than artikel.menge
@@ -50,6 +50,13 @@ public class OrderService {
         return dbHandler.selectAllArtikelFrombestellung(bestellung);
     }
 
+    /**
+     * This function searches for Artikel by given name and links it with Bestellung, then updates Artikel.menge
+     * @param bestellung must exist in db
+     * @param artikelName used to find Artikel in DB
+     * @param menge can't be greater than artikel.menge
+     * @return a list of Artikel relate to bestellung
+     */
     public List<Artikel> addArtikelToBestellung(Bestellung bestellung, String artikelName, int menge) {
         Artikel artikel = dbHandler.selectArtikelByName(artikelName);
         if(artikel != null && artikel.getPn_id() != 0) {
@@ -60,6 +67,11 @@ public class OrderService {
         return new ArrayList<>();
     }
 
+    /**
+     * Creates a new empty Bestellung and links it with person
+     * @param person
+     * @return new Bestellung
+     */
     public Bestellung createNewBestelung(Person person) {
         if(person != null && person.getPn_id() != 0) {
             java.util.Date utilDate = new java.util.Date();
@@ -75,6 +87,7 @@ public class OrderService {
 
     /**
      * Deletes all Bestellzuordnungen related to Bestellung. Then deletes Bestellung itself.
+     * Afterwards the Artikel.menge is reset to it's previous quantity.
      * @param bestellung is an existent Bestellung from database with valid id.
      */
     public void cancelBestellung(Bestellung bestellung) {
@@ -95,6 +108,12 @@ public class OrderService {
         }
     }
 
+    /**
+     * Finishes up a Bestellung / order and creates an Auslieferung / delivery.
+     * Aterwards it assign some random worker to the delivery.
+     * @param bestellung
+     * @return new delivery / Auslieferung
+     */
     public Auslieferung orderBestellung(Bestellung bestellung) {
         if(bestellung != null && bestellung.getId() != 0) {
             bestellung.setState("ready");

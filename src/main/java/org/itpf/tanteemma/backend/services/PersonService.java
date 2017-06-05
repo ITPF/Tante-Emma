@@ -6,7 +6,7 @@ import org.itpf.tanteemma.backend.models.Person;
 import java.util.List;
 
 /**
- * Created by User on 6/4/2017.
+ * Used to handle Person data.
  */
 public class PersonService {
     private DBHandler dbHandler;
@@ -25,6 +25,12 @@ public class PersonService {
         return dbHandler.selectPerson(person);
     }
 
+    /**
+     * Searches for a person by given name. Attention, there might be some persons with the same name.
+     * @param vorname
+     * @param name
+     * @return found Person
+     */
     public Person findPersonsByName(String vorname, String name) {
         return dbHandler.selectPersonByName(vorname, name);
     }

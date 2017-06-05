@@ -7,7 +7,7 @@ import org.itpf.tanteemma.backend.models.Person;
 
 /**
  * Created by ffigorstoljarow on 24.05.2017.
- * Fills the database with some entities. USed for the first initialization.
+ * Fills the database with some entities. Used for the first initialization.
  */
 public class DBFiller {
     private DBHandler dbHandler;

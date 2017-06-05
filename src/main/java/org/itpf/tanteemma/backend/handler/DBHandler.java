@@ -249,6 +249,11 @@ public class DBHandler {
         return artikelList;
     }
 
+    /**
+     * Updates anArtikel by it's id. Other values are overwritten.
+     * @param artikel which is being updated
+     * @return amount of rows updated
+     */
     public int updateArtikel(Artikel artikel) {
         return this.tryRunUpdateQuery("update artikel set v_artikelname = '" +
                 artikel.getV_artikelname() + "', v_bezeichnung = '" +
