@@ -16,7 +16,6 @@ import java.util.*;
  * Attention! References are being ignored while deleting things. Use wisely.
  * DBHandler is using internal Models and maps them manually to more comfortable ones.
  */
-@SuppressWarnings("synthetic-access")
 public class DBHandler {
     private DbDao dbDao;
 
@@ -35,6 +34,23 @@ public class DBHandler {
                 url += "/" + config.get("jdbc.database");
             }
             dbDao.setConnection(url, config.get("jdbc.driver"), config.get("jdbc.user"), config.get("jdbc.password"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public DBHandler(String url, String databaseName, String jdbcDriverPath, String user, String password) {
+        dbDao = new DbDaoImplJdbc();
+        try {
+            dbDao.setConnection(url, jdbcDriverPath, user, password);
+            this.createDatabase(databaseName);
+            String fullUrl = jdbcDriverPath;
+            if(fullUrl.endsWith("/")) {
+                fullUrl += databaseName;
+            } else {
+                fullUrl += "/" + databaseName;
+            }
+            dbDao.setConnection(fullUrl, jdbcDriverPath, user, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,7 +146,7 @@ public class DBHandler {
     }
 
     private Person selectPersonById(long personId) {
-        return this.tryRunSelectQuery(Person.class, "select * from Person where pn_id = '2';");
+        return this.tryRunSelectQuery(Person.class, "select * from Person where pn_id = '" + personId + "';");
     }
 
     /**
@@ -334,6 +350,32 @@ public class DBHandler {
         return new Auslieferung(auslieferungIntern.getPn_id(), person, bestellung, auslieferungIntern.getD_erstell());
     }
 
+    public List<Auslieferung> selectAllFromAuslieferungByBestellungStatus(String status) {
+        List<AuslieferungIntern> auslieferungInternList = this.tryRunMultipleSelectQueries(AuslieferungIntern.class,
+                "select * from auslieferung inner join bestellung on auslieferung.n_bestellungid_fk = bestellung.pn_id where bestellung.v_status = '" +
+                        status + "';");
+        List<Auslieferung> auslieferungList = new ArrayList<>();
+        for (AuslieferungIntern auslieferungIntern : auslieferungInternList) {
+            Person auslieferer = this.selectPersonById(auslieferungIntern.getN_personid_fk());
+            Bestellung bestellung = this.selectBestellungById(auslieferungIntern.getN_bestellungid_fk());
+
+            auslieferungList.add(new Auslieferung(auslieferungIntern.getPn_id(), auslieferer, bestellung, auslieferungIntern.getD_erstell()));
+        }
+        return auslieferungList;
+    }
+
+    public List<Auslieferung> selectAllfromAusliefrungByPerson(Person person) {
+        List<AuslieferungIntern> auslieferungInternList = this.tryRunMultipleSelectQueries(AuslieferungIntern.class,
+                "select * from auslieferung where n_personid_fk = '" + person.getPn_id() + "';");
+        List<Auslieferung> auslieferungList = new ArrayList<>();
+        for (AuslieferungIntern intern : auslieferungInternList) {
+            Bestellung bestellung = this.selectBestellungById(intern.getN_bestellungid_fk());
+
+            auslieferungList.add(new Auslieferung(intern.getPn_id(), person, bestellung, intern.getD_erstell()));
+        }
+        return auslieferungList;
+    }
+
     // --- Bestellzuordnung
 
     public int createBestellzuordnungTable() {
@@ -379,6 +421,7 @@ public class DBHandler {
     public void createDatabase(String dbName) {
         this.tryRunUpdateQuery("create database if not exists " + dbName + ";");
     }
+
 
 
 }
