@@ -1,4 +1,6 @@
-package org.itpf.tanteemma.app;
+package org.itpf.tanteemma.frontend;
+
+import org.itpf.tanteemma.frontend.App;
 
 /**
  * Used for console tests.

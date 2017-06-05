@@ -1,4 +1,4 @@
-package org.itpf.tanteemma.app;
+package org.itpf.tanteemma.frontend;
 
 import java.io.File;
 import java.util.List;
