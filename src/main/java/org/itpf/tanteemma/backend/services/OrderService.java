@@ -132,6 +132,10 @@ public class OrderService {
         return new Auslieferung();
     }
 
+    public int getCountArtikelInBestellung(Bestellung bestellung) {
+        return dbHandler.selectAllBestellzurodnungenByBestellung(bestellung).size();
+    }
+
     private int generateRandomNumber(int min, int max) {
         if(max == -1)
             return 0;
@@ -142,4 +146,40 @@ public class OrderService {
         return (int)(fraction + min);
     }
 
+    public List<Artikel> getAllArtikel() {
+        return dbHandler.selectAllFromArtikel();
+    }
+
+    public Artikel findArtikelById(long id) {
+        return dbHandler.selectArtikelById(id);
+    }
+
+    public Bestellung findOpenBestellungByPerson(Person person) {
+        if(person != null && person.getPn_id() != 0) {
+            return dbHandler.selectOpenBestellungByPersonId(person.getPn_id());
+        } else {
+            ErrorHandler.showError("Kann keine Bestellungen finden,da die Person nicht existiert.");
+        }
+        return new Bestellung();
+    }
+
+    public List<Artikel> getAllArtikelOfBestellung(Bestellung bestellung) {
+        if(bestellung != null && bestellung.getId() != 0) {
+            return dbHandler.selectAllArtikelFrombestellung(bestellung);
+        }
+        else {
+            ErrorHandler.showError("Die Bestellung existiert nicht!");
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Bestellzuordnung> getAllZuordnungenOfBestellung(Bestellung bestellung) {
+        if(bestellung != null && bestellung.getId() != 0) {
+            return dbHandler.selectAllBestellzurodnungenByBestellung(bestellung);
+        }
+        else {
+            ErrorHandler.showError("Kann keine Zuordnungen finden, da die Bestellng nicht existiert!");
+        }
+        return new ArrayList<>();
+    }
 }

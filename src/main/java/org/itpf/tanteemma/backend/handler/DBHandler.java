@@ -216,6 +216,19 @@ public class DBHandler {
         return this.tryRunMultipleSelectQueries(Person.class, "select * from person where v_rolle = '" + rolle + "';");
     }
 
+    public int updatePerson(Person person) {
+        return this.tryRunUpdateQuery("update person set v_name = '" +
+                person.getV_name() + "', v_vorname = '" +
+                person.getV_vorname() + "', v_telefon = '" +
+                person.getV_telefon() + "', v_email = '" +
+                person.getV_email() + "', v_rolle = '" +
+                person.getV_rolle() + "', v_strasse = '" +
+                person.getV_strasse() + "', v_ort = '" +
+                person.getV_ort() + "', v_plz = '" +
+                person.getV_plz() + "' where pn_id = '" +
+                person.getPn_id() + "';");
+    }
+
     // --- Artikel
 
     public int createArtikelTable() {
@@ -263,7 +276,7 @@ public class DBHandler {
                 artikel.getPn_id() + "';");
     }
 
-    private Artikel selectArtikelById(long artikelId) {
+    public Artikel selectArtikelById(long artikelId) {
         return this.tryRunSelectQuery(Artikel.class, "select * from artikel where pn_id = '" + artikelId + "';");
     }
 
@@ -326,6 +339,17 @@ public class DBHandler {
                 bestellung.getId() + "';");
     }
 
+    public Bestellung selectOpenBestellungByPersonId(long pn_id) {
+        BestellungIntern intern = tryRunSelectQuery(BestellungIntern.class, "select * from bestellung where n_personid_fk = '" +
+                pn_id + "' and v_status = 'open' limit 1;");
+        if(intern != null && intern.getPn_id() != 0 && intern.getN_personid_fk() != 0) {
+            Person person = this.selectPersonById(intern.getN_personid_fk());
+            Bestellung bestellung = new Bestellung(intern.getPn_id(), person, intern.getD_datum(), intern.getV_status());
+            return bestellung;
+        }
+        return new Bestellung();
+    }
+
     // --- Auslieferung
 
     public int createAuslieferungTable() {
@@ -370,13 +394,22 @@ public class DBHandler {
     }
 
     public List<Auslieferung> selectAllfromAusliefrungByPerson(Person person) {
+        String query = "select * from auslieferung where n_personid_fk = '" + person.getPn_id() + "';";
         List<AuslieferungIntern> auslieferungInternList = this.tryRunMultipleSelectQueries(AuslieferungIntern.class,
-                "select * from auslieferung where n_personid_fk = '" + person.getPn_id() + "';");
+                query);
         List<Auslieferung> auslieferungList = new ArrayList<>();
-        for (AuslieferungIntern intern : auslieferungInternList) {
-            Bestellung bestellung = this.selectBestellungById(intern.getN_bestellungid_fk());
+        if(auslieferungInternList.size() != 0) {
+            for (AuslieferungIntern intern : auslieferungInternList) {
+                Bestellung bestellung = this.selectBestellungById(intern.getN_bestellungid_fk());
 
-            auslieferungList.add(new Auslieferung(intern.getPn_id(), person, bestellung, intern.getD_erstell()));
+                auslieferungList.add(new Auslieferung(intern.getPn_id(), person, bestellung, intern.getD_erstell()));
+            }
+        } else {
+            AuslieferungIntern auslieferungIntern= this.tryRunSelectQuery(AuslieferungIntern.class, query);
+            if(auslieferungIntern != null && auslieferungIntern.getPn_id() != 0) {
+                Bestellung bestellung = this.selectBestellungById(auslieferungIntern.getN_bestellungid_fk());
+                auslieferungList.add(new Auslieferung(auslieferungIntern.getPn_id(), person, bestellung, auslieferungIntern.getD_erstell()));
+            }
         }
         return auslieferungList;
     }
@@ -426,7 +459,6 @@ public class DBHandler {
     public void createDatabase(String dbName) {
         this.tryRunUpdateQuery("create database if not exists " + dbName + ";");
     }
-
 
 
 }

@@ -55,10 +55,10 @@ public class ServiceTest {
 
     @Test
     public void testServices() {
-        Person igor = personService.findPersonsByName("Igor", "Stoljarow");
+        Person igor = personService.findPersonByName("Igor", "Stoljarow");
         assertNotNull("Igor must exist", igor);
         assertTrue("Igor's geschlecht must be unbekannt", igor.getV_geschlecht().equals("unbekannt"));
-        Person filizTest = personService.findPersonsByName("FilizTest", "Neumann");
+        Person filizTest = personService.findPersonByName("FilizTest", "Neumann");
         assertNull("FilizTest should not exist", filizTest);
 
         Bestellung igorsBestellung = orderService.createNewBestelung(igor);
