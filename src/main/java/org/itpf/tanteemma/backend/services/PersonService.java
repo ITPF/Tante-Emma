@@ -10,9 +10,19 @@ import java.util.List;
  * Used to handle Person data.
  */
 public class PersonService {
+
+    public static PersonService instance;
+
+    public static PersonService getInstance(){
+        if(instance == null){
+            instance = new PersonService();
+        }
+        return instance;
+    }
+
     private DBHandler dbHandler;
 
-    public PersonService() {
+    private PersonService() {
         this.dbHandler = new DBHandler();
     }
 
