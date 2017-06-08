@@ -25,6 +25,10 @@ public class Bestellzuordnung {
         return bestellung;
     }
 
+    public String getArtikelName(){
+        return artikel.getV_artikelname();
+    }
+
     public void setBestellung(Bestellung bestellung) {
         this.bestellung = bestellung;
     }
@@ -37,11 +41,11 @@ public class Bestellzuordnung {
         this.artikel = artikel;
     }
 
-    public int getMenge() {
+    public Integer getMenge() {
         return menge;
     }
 
-    public void setMenge(int menge) {
+    public void setMenge(Integer menge) {
         this.menge = menge;
     }
 

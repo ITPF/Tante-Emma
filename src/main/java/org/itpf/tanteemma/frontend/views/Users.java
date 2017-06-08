@@ -59,12 +59,7 @@ public class Users extends VerticalLayout implements View {
 
 
         Button update = new Button("Update Table");
-        update.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(Button.ClickEvent clickEvent) {
-                updateGrid();
-            }
-        });
+        update.addClickListener((Button.ClickListener) clickEvent -> updateGrid());
 
         Button addUser = new Button("Add User");
         addUser.addClickListener((Button.ClickListener) clickEvent -> {
@@ -85,6 +80,7 @@ public class Users extends VerticalLayout implements View {
     }
 
     private void updateGrid() {
+//        persons = PersonService.getInstance().getAllPersons();
         grid.setItems(persons);
     }
 

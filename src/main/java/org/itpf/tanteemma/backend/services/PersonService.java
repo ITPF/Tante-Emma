@@ -46,10 +46,6 @@ public class PersonService {
         return person;
     }
 
-    public List<Person> getAllPerson(){
-        //TODO: Zeug hier rein schreiben
-        return null;
-    }
 
     public Person updatePerson(Person person) {
         if(person != null && person.getPn_id() != 0) {

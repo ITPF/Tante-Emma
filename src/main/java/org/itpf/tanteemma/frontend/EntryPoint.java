@@ -10,6 +10,7 @@ import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
 import org.itpf.tanteemma.frontend.views.Orders;
 import org.itpf.tanteemma.frontend.views.Products;
 import org.itpf.tanteemma.frontend.views.Users;
+import org.itpf.tanteemma.frontend.windows.ShoppingCart;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -21,16 +22,16 @@ import javax.servlet.annotation.WebServlet;
 public class EntryPoint extends UI {
 
     public static Navigator navigator;
-
+    public static ShoppingCart shoppingCart;
 
     protected void init(VaadinRequest vaadinRequest) {
 
 
+        shoppingCart = new ShoppingCart();
         navigator = new Navigator(this, this);
         navigator.addView(Users.VIEW_NAME, new Users());
         navigator.addView(Orders.VIEW_NAME, new Orders());
         navigator.addView(Products.VIEW_NAME, new Products());
-
 
 
 

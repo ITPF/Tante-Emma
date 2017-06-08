@@ -1,6 +1,8 @@
 package org.itpf.tanteemma.frontend.customobjects;
 
 import com.vaadin.ui.MenuBar;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.Window;
 import org.itpf.tanteemma.frontend.EntryPoint;
 import org.itpf.tanteemma.frontend.views.Orders;
 import org.itpf.tanteemma.frontend.views.Products;
@@ -14,7 +16,7 @@ public class NavigationBar extends MenuBar {
 
     public NavigationBar() {
 
-        MenuBar.Command navToUsers = (Command) menuItem -> EntryPoint.navigator.navigateTo(Users.VIEW_NAME);
+        MenuBar.Command navToUsers = menuItem -> EntryPoint.navigator.navigateTo(Users.VIEW_NAME);
 
         MenuBar.Command navToOrders = menuItem -> EntryPoint.navigator.navigateTo(Orders.VIEW_NAME);
 
@@ -22,6 +24,9 @@ public class NavigationBar extends MenuBar {
 
         MenuBar.Command openSC = menuItem -> {
 
+            if(!EntryPoint.shoppingCart.isAttached()){
+                UI.getCurrent().addWindow(EntryPoint.shoppingCart);
+            }
         };
 
 

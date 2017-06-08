@@ -1,11 +1,14 @@
 package org.itpf.tanteemma.frontend.views;
 
+import com.vaadin.event.MouseEvents;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.renderers.ButtonRenderer;
 import org.itpf.tanteemma.backend.models.Artikel;
+import org.itpf.tanteemma.frontend.EntryPoint;
 import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
 
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ import java.util.List;
  */
 public class Products extends VerticalLayout implements View {
 
-    public static final String VIEW_NAME = "products";
+    public static final String VIEW_NAME = "";
 
     public Products() {
         addComponent(new NavigationBar());
@@ -26,8 +29,7 @@ public class Products extends VerticalLayout implements View {
                                                              new Artikel(2, "Käse", "Ja", 20.01, 50),
                                                              new Artikel(3, "Fleisch", "So", 20.01, 400),
                                                              new Artikel(4, "Fisch", "Schnitt", 20.01, 300),
-                                                             new Artikel(5, "Gemüse", "Test", 20.01, 600),
-                                                             });
+                                                             new Artikel(5, "Gemüse", "Test", 20.01, 600),});
 
         Grid<Artikel> grid = new Grid<>();
 
@@ -36,17 +38,26 @@ public class Products extends VerticalLayout implements View {
         grid.addColumn(Artikel::getV_bezeichnung).setCaption("Bezeichnung");
         grid.addColumn(Artikel::getN_preis).setCaption("Preis");
 
-        grid.addColumn(person -> "In den Warenkorb", new ButtonRenderer<>(clickevent -> {
 
-        }));
+
 
         addComponent(grid);
 
 
+        Button order = new Button("In den Warenkorb");
+        order.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                for(Artikel a : grid.getSelectedItems()){
+                    EntryPoint.shoppingCart.addProduct(a);
+                }
+            }
+        });
+        addComponent(order);
 
     }
 
-    private void refreshTable(){
+    private void refreshTable() {
 
     }
 
