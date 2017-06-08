@@ -74,4 +74,8 @@ public class PersonService {
         Person person = new Person(0, name, vorname, "", "", "", "", strasse, ort, plz);
         return dbHandler.selectPerson(person);
     }
+
+    public List<Person> getAllPersons() {
+        return dbHandler.selectAllFromPerson();
+    }
 }
