@@ -20,11 +20,18 @@ public class NavigationBar extends MenuBar {
 
         MenuBar.Command navToProducts = menuItem -> EntryPoint.navigator.navigateTo(Products.VIEW_NAME);
 
+        MenuBar.Command openSC = menuItem -> {
+
+        };
+
+
         MenuBar.MenuItem products = addItem("Produkte", navToProducts);
 
         MenuBar.MenuItem users = addItem("Personenverwaltung", navToUsers);
 
         MenuBar.MenuItem orders = addItem("Meine Bestellungen", navToOrders);
+
+        MenuBar.MenuItem sc = addItem("Einkauswagen", openSC);
 
 
     }

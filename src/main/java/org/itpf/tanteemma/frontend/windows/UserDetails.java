@@ -6,10 +6,12 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
 import org.itpf.tanteemma.backend.models.Person;
+import org.itpf.tanteemma.backend.services.PersonService;
 
 /**
  * Created by Lindner.Patrick on 08.06.2017.
@@ -22,7 +24,7 @@ public class UserDetails extends Window {
 
         center();
         setClosable(true);
-        GridLayout layout = new GridLayout(10,5);
+        GridLayout layout = new GridLayout(2, 10);
         layout.setMargin(true);
         setContent(layout);
 
@@ -39,7 +41,6 @@ public class UserDetails extends Window {
         gender.setItems("Männlich", "Weiblich");
         layout.addComponent(new Label("Geschlecht"));
         layout.addComponent(gender);
-
 
 
         TextField telefon = new TextField();
@@ -75,17 +76,20 @@ public class UserDetails extends Window {
         ok.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
-                insertPerson(new Person());
+                PersonService.getInstance().createNewPerson(nachname.getValue(), vorname.getValue(), gender.getValue(),
+                                                            telefon.getValue(), email.getValue(), role.getValue(),
+                                                            strasse.getValue(), ort.getValue(), plz.getValue());
+
+                Notification.show("Person "+ vorname.getValue() + " " + nachname.getValue() + " wurde erstellt.");
             }
         });
 
+
+
+        layout.addComponent(cancel);
+        layout.addComponent(ok);
+
     }
-
-    private void insertPerson(Person p){
-
-
-    }
-
 
 
 }
