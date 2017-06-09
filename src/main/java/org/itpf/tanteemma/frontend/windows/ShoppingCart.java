@@ -1,19 +1,17 @@
 package org.itpf.tanteemma.frontend.windows;
 
 import com.vaadin.data.Binder;
-import com.vaadin.data.ValueProvider;
-import com.vaadin.server.Setter;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Layout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.itpf.tanteemma.backend.models.Artikel;
 import org.itpf.tanteemma.backend.models.Bestellung;
 import org.itpf.tanteemma.backend.models.Bestellzuordnung;
+import org.itpf.tanteemma.frontend.EntryPoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,7 @@ public class ShoppingCart extends Window {
 
     private Grid<Bestellzuordnung> grid;
 
-    private List<Bestellzuordnung> artikel;
+    private List<Bestellzuordnung> bestellzuordnungen;
 
     private Bestellung bestellung;
 
@@ -34,7 +32,8 @@ public class ShoppingCart extends Window {
 
         super("Einkaufswagen");
 
-        artikel = new ArrayList<>();
+        bestellung = new Bestellung();
+        bestellzuordnungen = new ArrayList<>();
         grid = new Grid<>();
         grid.addColumn(bestellzuordnung -> bestellzuordnung.getArtikel().getV_artikelname()).setCaption("Artikel");
         grid.addColumn(bestellzuordnung -> bestellzuordnung.getArtikel().getV_bezeichnung()).setCaption("Bezeichnung");
@@ -48,12 +47,47 @@ public class ShoppingCart extends Window {
 
         layout.addComponent(grid);
 
+
+        HorizontalLayout hl = new HorizontalLayout();
+        layout.addComponent(hl);
+
+        Button remove = new Button("Entfernen");
+        remove.addClickListener(evt -> {
+            bestellzuordnungen.removeAll(grid.getSelectedItems());
+            grid.setItems(bestellzuordnungen);
+        });
+
+        hl.addComponent(remove);
+
         Button order = new Button("Bestellen");
-        layout.addComponent(order);
+        order.addClickListener(event -> {
+            EntryPoint.orders.addBestellung(bestellung, bestellzuordnungen);
+            clearBestellung();
+
+        });
+
+        hl.addComponent(order);
+        hl.setComponentAlignment(order, Alignment.MIDDLE_RIGHT);
 
 
+        enableEditableAnmout();
+
+
+    }
+
+    public void clearBestellung() {
         bestellung = new Bestellung();
+        bestellzuordnungen = new ArrayList<>();
+        grid.setItems(bestellzuordnungen);
+    }
 
+    public void addProduct(Artikel a) {
+        bestellzuordnungen.add(new Bestellzuordnung(0, bestellung, a, 1));
+        grid.setItems(bestellzuordnungen);
+
+    }
+
+    private void enableEditableAnmout() {
         TextField field = new TextField();
 
         Binder<Bestellzuordnung> binder = grid.getEditor().getBinder();
@@ -75,20 +109,11 @@ public class ShoppingCart extends Window {
 //        });
 
 
-        Grid.Column<Bestellzuordnung, Integer> col = grid.addColumn(Bestellzuordnung::getMenge);
+        Grid.Column<Bestellzuordnung, Integer> col = grid.addColumn(Bestellzuordnung::getMenge).setCaption("Menge");
         col.setEditorBinding(binding);
         col.setEditable(true);
 
 
         grid.getEditor().setEnabled(true);
-
-
-
-    }
-
-    public void addProduct(Artikel a) {
-        artikel.add(new Bestellzuordnung(0, bestellung, a, 1));
-        grid.setItems(artikel);
-
     }
 }

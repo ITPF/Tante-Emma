@@ -25,6 +25,7 @@ public class UserDetails extends Window {
         center();
         setClosable(true);
         GridLayout layout = new GridLayout(2, 10);
+        layout.setSpacing(true);
         layout.setMargin(true);
         setContent(layout);
 
