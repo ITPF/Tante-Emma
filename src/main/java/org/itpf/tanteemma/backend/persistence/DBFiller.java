@@ -22,11 +22,11 @@ public class DBFiller {
         dbHandler.dropAlltables();
         dbHandler.createAllTables();
 
-        dbHandler.insertNewPerson(new Person(0, "Neumann", "Filiz", "weiblich", "02133977866", "filiz.neumann@gmail.com", "Mitarbeiter", "Bluemental 1", "Neuss", "41545"));
-        dbHandler.insertNewPerson(new Person(0, "Kraemer", "Tatjana", "weiblich", "02133977654", "tatjana.kraemer@gmail.com", "Mitarbeiter", "Ebertplatz 7", "Köln", "33442"));
-        dbHandler.insertNewPerson(new Person(0, "Lindner", "Patrick", "maennlich", "02133977344", "patrick.lindner@gmail.com", "Mitarbeiter", "Po der Welt 1", "Ewigen", "666"));
-        dbHandler.insertNewPerson(new Person(0, "Lindmann", "Patrick", "maennlich", "02133977666", "lin@web.de", "Kunde", "Weilerstr. 1", "Dormagen", "41540"));
-        dbHandler.insertNewPerson(new Person(0, "Stoljarow", "Igor", "unbekannt", "02144567567", "igor@web.de", "Kunde", "Teuschsweg 666", "Dormagen", "51539"));
+        dbHandler.insertNewPerson(new Person(0, "Neumann", "Filiz", Person.FEM, "02133977866", "filiz.neumann@gmail.com", Person.WORKER, "Bluemental 1", "Neuss", "41545"));
+        dbHandler.insertNewPerson(new Person(0, "Kraemer", "Tatjana", Person.FEM, "02133977654", "tatjana.kraemer@gmail.com", Person.WORKER, "Ebertplatz 7", "Köln", "33442"));
+        dbHandler.insertNewPerson(new Person(0, "Lindner", "Patrick", Person.MEN, "02133977344", "patrick.lindner@gmail.com", Person.WORKER, "Po der Welt 1", "Ewigen", "666"));
+        dbHandler.insertNewPerson(new Person(0, "Lindmann", "Patrick", Person.MEN, "02133977666", "lin@web.de", Person.KUNDE, "Weilerstr. 1", "Dormagen", "41540"));
+        dbHandler.insertNewPerson(new Person(0, "Stoljarow", "Igor", Person.MEN, "02144567567", "igor@web.de", Person.KUNDE, "Teuschsweg 666", "Dormagen", "51539"));
 
         dbHandler.insertNewArtikel(new Artikel(0, "Klopapier", "Packung mit 20 Klopapiereinheiten", 3.95, 100));
         dbHandler.insertNewArtikel(new Artikel(0, "Bananen", "Eine Packung Bananen", 7.99, 50));

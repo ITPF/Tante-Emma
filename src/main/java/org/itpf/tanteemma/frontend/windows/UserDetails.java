@@ -1,17 +1,13 @@
 package org.itpf.tanteemma.frontend.windows;
 
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import org.itpf.tanteemma.backend.models.Person;
-import org.itpf.tanteemma.backend.services.PersonService;
 import org.itpf.tanteemma.frontend.EntryPoint;
 
 /**
@@ -19,80 +15,96 @@ import org.itpf.tanteemma.frontend.EntryPoint;
  */
 public class UserDetails extends Window {
 
-    public UserDetails() {
+    private boolean edit = false;
+
+    public UserDetails(final Person p) {
 
         super("User Details");
 
+        if (p != null) {
+            edit = true;
+        }
+
         center();
         setClosable(true);
-        GridLayout layout = new GridLayout(2, 10);
+        VerticalLayout layout = new VerticalLayout();
         layout.setSpacing(true);
         layout.setMargin(true);
         setContent(layout);
 
-        TextField vorname = new TextField();
-        layout.addComponent(new Label("Vorname"));
+        TextField vorname = new TextField("Vorname");
+        vorname.setValue(p == null ? "" : p.getV_vorname());
         layout.addComponent(vorname);
 
-        TextField nachname = new TextField();
-        layout.addComponent(new Label("Nachname"));
+        TextField nachname = new TextField("Nachname");
+        nachname.setValue(p == null ? "" : p.getV_name());
         layout.addComponent(nachname);
 
 
-        RadioButtonGroup<String> gender = new RadioButtonGroup<>();
-        gender.setItems("Männlich", "Weiblich");
-        layout.addComponent(new Label("Geschlecht"));
+        RadioButtonGroup<String> gender = new RadioButtonGroup<>("Geschlecht");
+        gender.setItems(Person.MEN, Person.FEM);
+        gender.setSelectedItem(p == null ? Person.MEN : p.getV_geschlecht());
         layout.addComponent(gender);
 
 
-        TextField telefon = new TextField();
-        layout.addComponent(new Label("Telefon"));
+        TextField telefon = new TextField("Telefon");
+        telefon.setValue(p == null ? "" : p.getV_telefon());
         layout.addComponent(telefon);
 
 
-        TextField email = new TextField();
-        layout.addComponent(new Label("E-Mail"));
+        TextField email = new TextField("E-Mail");
+        email.setValue(p == null ? "" : p.getV_telefon());
         layout.addComponent(email);
 
 
-        RadioButtonGroup<String> role = new RadioButtonGroup<>();
-        role.setItems("Kunde", "Mitarbeiter", "Admin");
-        layout.addComponent(new Label("Rolle"));
+        RadioButtonGroup<String> role = new RadioButtonGroup<>("Rolle");
+        role.setItems(Person.KUNDE, Person.WORKER);
+        role.setSelectedItem(p == null ? Person.KUNDE : p.getV_rolle());
         layout.addComponent(role);
 
-        TextField strasse = new TextField();
-        layout.addComponent(new Label("Straße"));
+        TextField strasse = new TextField("Straße");
+        strasse.setValue(p == null ? "" : p.getV_strasse());
         layout.addComponent(strasse);
 
-        TextField ort = new TextField();
-        layout.addComponent(new Label("Ort"));
+        TextField ort = new TextField("Ort");
+        ort.setValue(p == null ? "" : p.getV_ort());
         layout.addComponent(ort);
 
 
-        TextField plz = new TextField();
-        layout.addComponent(new Label("Postleitzahl"));
+        TextField plz = new TextField("Postleitzahl");
+        plz.setValue(p == null ? "" : p.getV_ort());
         layout.addComponent(plz);
 
+        HorizontalLayout hlayout = new HorizontalLayout();
+
+        layout.addComponent(hlayout);
+
         Button ok = new Button("Speichern");
-        Button cancel = new Button("Abbrechen");
         ok.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
-//                PersonService.getInstance().createNewPerson(nachname.getValue(), vorname.getValue(), gender.getValue(),
-//                                                            telefon.getValue(), email.getValue(), role.getValue(),
-//                                                            strasse.getValue(), ort.getValue(), plz.getValue());
 
-                Notification.show("Person " + vorname.getValue() + " " + nachname.getValue() + " wurde erstellt.");
-                EntryPoint.users.addUser(
-                        new Person(0, nachname.getValue(), vorname.getValue(), gender.getValue(), telefon.getValue(),
-                                   email.getValue(), role.getValue(), strasse.getValue(), ort.getValue(),
-                                   plz.getValue()));
+                Person tmpP = new Person(0, nachname.getValue(), vorname.getValue(), gender.getValue(),
+                                         telefon.getValue(), email.getValue(), role.getValue(), strasse.getValue(),
+                                         ort.getValue(), plz.getValue());
+                if (!edit) {
+                    EntryPoint.users.addUser(tmpP);
+
+//                    PersonService.getInstance().createNewPerson(tmpP);
+                    Notification.show("Person " + tmpP.getV_vorname() + " " + tmpP.getV_name() + " wurde erstellt.");
+
+                } else {
+                    EntryPoint.users.removeUser(p);
+                    EntryPoint.users.addUser(tmpP);
+//                    PersonService.getInstance().updatePerson(tmpP);
+                }
+
+                close();
             }
         });
 
 
-        layout.addComponent(cancel);
-        layout.addComponent(ok);
+        hlayout.addComponent(ok);
 
     }
 

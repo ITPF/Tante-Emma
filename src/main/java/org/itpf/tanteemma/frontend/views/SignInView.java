@@ -37,17 +37,19 @@ public class SignInView extends Panel implements View {
         Button login = new Button("Login");
         layout.addComponent(login);
         login.addClickListener(evt -> {
-            Person p = PersonService.getInstance().findPersonByName(firstname.getValue(), lastname.getValue());
+//            Person p = PersonService.getInstance().findPersonByName(firstname.getValue(), lastname.getValue());
+            Person p = new Person(1, "patrick", "lindner", "m", "123451111", "p@me.com", Person.KUNDE, "Straße 1", "ort 1",
+                                  "plz1");
             if (p != null) {
                 EntryPoint.person = p;
                 EntryPoint.navigator.navigateTo(Products.VIEW_NAME);
-            }else{
+            } else {
                 Notification.show("Dieser User existiert nicht");
             }
 
         });
 
-
+        setWidth(null);
 
 
     }

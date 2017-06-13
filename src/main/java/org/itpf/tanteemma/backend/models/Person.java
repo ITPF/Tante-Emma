@@ -4,6 +4,14 @@ package org.itpf.tanteemma.backend.models;
  * Created by ffigorstoljarow on 17.05.2017.
  */
 public class Person {
+
+    public static final String KUNDE = "Kunde";
+    public static final String WORKER = "Mitarbeiter";
+
+    public static final String MEN = "Maennlich";
+    public static final String FEM = "Weiblich";
+
+
     private long pn_id;
     private String v_name;
     private String v_vorname;

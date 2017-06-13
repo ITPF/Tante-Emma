@@ -3,6 +3,7 @@ package org.itpf.tanteemma.frontend.views;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import org.itpf.tanteemma.backend.models.Auslieferung;
 import org.itpf.tanteemma.backend.models.Bestellung;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by Lindner.Patrick on 08.06.2017.
  */
-public class Orders extends VerticalLayout implements View {
+public class Orders extends Panel implements View {
 
     public static final String VIEW_NAME = "orders";
 
@@ -27,16 +28,21 @@ public class Orders extends VerticalLayout implements View {
     public Grid<Bestellung> grid;
 
     public Orders() {
-        addComponent(new NavigationBar());
+        super("Bestellungen");
+        VerticalLayout layout = new VerticalLayout();
+        setContent(layout);
+        layout.addComponent(new NavigationBar());
 
         bestellungen = new ArrayList<>();
         grid = new Grid<>();
 
         grid.addColumn(Bestellung::getId).setCaption("ID");
         grid.addColumn(Bestellung::getState).setCaption("State");
+        grid.addColumn(Bestellung::getDate).setCaption("Bestelldatum");
 
-        addComponent(grid);
-
+        grid.setSizeFull();
+        setWidth(50, Unit.PERCENTAGE);
+        layout.addComponent(grid);
 
     }
 

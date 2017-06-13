@@ -5,23 +5,20 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Notification;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import org.itpf.tanteemma.backend.models.Person;
-import org.itpf.tanteemma.backend.services.PersonService;
 import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
 import org.itpf.tanteemma.frontend.windows.UserDetails;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Lindner.Patrick on 08.06.2017.
  */
-public class Users extends VerticalLayout implements View {
+public class Users extends Panel implements View {
 
     public static final String VIEW_NAME = "users";
 
@@ -30,7 +27,7 @@ public class Users extends VerticalLayout implements View {
     private List<Person> persons;
 
     public Users() {
-
+        super("Userverwaltung");
         persons = new ArrayList<>();
 // Arrays.asList(
 //
@@ -47,46 +44,62 @@ public class Users extends VerticalLayout implements View {
 //
 //                });
 
-
-        addComponent(new NavigationBar());
+        VerticalLayout layout = new VerticalLayout();
+        setContent(layout);
+        layout.addComponent(new NavigationBar());
 
 
         grid = new Grid<>();
 
-        addComponent(grid);
+        layout.addComponent(grid);
         grid.addColumn(Person::getV_name).setCaption("Name");
         grid.addColumn(Person::getV_vorname).setCaption("Vorname");
+        grid.addColumn(Person::getV_email).setCaption("E-Mail");
+        grid.addColumn(Person::getV_plz).setCaption("Postleitzahl");
         grid.setItems(persons);
 
+        grid.setSizeFull();
+        setWidth(50, Unit.PERCENTAGE);
 
         Button addUser = new Button("Add User");
         addUser.addClickListener((Button.ClickListener) clickEvent -> {
-            UserDetails win = new UserDetails();
+            UserDetails win = new UserDetails(null);
             UI.getCurrent().addWindow(win);
 
         });
 
 
+        Button editUser = new Button("User Bearbeiten");
+        editUser.addClickListener(evt -> {
+           UserDetails win = new UserDetails(grid.getSelectedItems().iterator().next());
+           UI.getCurrent().addWindow(win);
+        });
+
 
         HorizontalLayout hl = new HorizontalLayout();
 
         hl.addComponent(addUser);
+        hl.addComponent(editUser);
+        layout.addComponent(hl);
 
-        addComponent(hl);
+
 
     }
 
-    public void addUser(Person p){
+    public void addUser(Person p) {
         persons.add(p);
         grid.setItems(persons);
+    }
 
+    public void removeUser(Person p){
+        persons.remove(p);
+        grid.setItems(persons);
     }
 
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
 
-        Notification.show("User Page");
 
     }
 }

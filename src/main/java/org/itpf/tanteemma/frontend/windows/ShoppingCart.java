@@ -1,6 +1,7 @@
 package org.itpf.tanteemma.frontend.windows;
 
 import com.vaadin.data.Binder;
+import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
@@ -13,7 +14,9 @@ import org.itpf.tanteemma.backend.models.Bestellung;
 import org.itpf.tanteemma.backend.models.Bestellzuordnung;
 import org.itpf.tanteemma.frontend.EntryPoint;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -32,14 +35,20 @@ public class ShoppingCart extends Window {
 
         super("Einkaufswagen");
 
+        setWidth("500");
+
+
+
         bestellung = new Bestellung();
+
         bestellzuordnungen = new ArrayList<>();
         grid = new Grid<>();
         grid.addColumn(bestellzuordnung -> bestellzuordnung.getArtikel().getV_artikelname()).setCaption("Artikel");
         grid.addColumn(bestellzuordnung -> bestellzuordnung.getArtikel().getV_bezeichnung()).setCaption("Bezeichnung");
 
-//        grid.addColumn(Bestellzuordnung::getMenge).setCaption("Menge");
+        grid.setSizeFull();
 
+        grid.setHeight(100, Unit.PERCENTAGE);
 
         VerticalLayout layout = new VerticalLayout();
 
@@ -61,8 +70,13 @@ public class ShoppingCart extends Window {
 
         Button order = new Button("Bestellen");
         order.addClickListener(event -> {
-            EntryPoint.orders.addBestellung(bestellung, bestellzuordnungen);
-            clearBestellung();
+            if (bestellzuordnungen.size() > 0) {
+
+                bestellung.setDate(new Date(Calendar.getInstance().getTime().getTime()));
+                bestellung.setState("ausstehend");
+                EntryPoint.orders.addBestellung(bestellung, bestellzuordnungen);
+                clearBestellung();
+            }
 
         });
 
