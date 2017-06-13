@@ -13,6 +13,7 @@ import org.itpf.tanteemma.backend.services.PersonService;
 import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
 import org.itpf.tanteemma.frontend.windows.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -30,20 +31,21 @@ public class Users extends VerticalLayout implements View {
 
     public Users() {
 
-        persons = Arrays.asList(
-
-                new Person[]{
-                        new Person(1, "patrick", "lindner", "m", "123451111", "p@me.com", "rolle1", "Straße 1", "ort 1",
-                                   "plz1"),
-                        new Person(2, "tatjana", "kraemer", "w", "123451111", "t@me.com", "rolle2", "Straße 1", "ort 2",
-                                   "plz1"),
-                        new Person(3, "igor", "stoljarow", "m", "123451111", "i@me.com", "rolle3", "Straße 1", "ort 3",
-                                   "plz1"),
-                        new Person(4, "filiz", "neumann", "w", "123451111", "f@me.com", "rolle4", "Straße 1", "ort 4",
-                                   "plz1")
-
-
-                });
+        persons = new ArrayList<>();
+// Arrays.asList(
+//
+//                new Person[]{
+//                        new Person(1, "patrick", "lindner", "m", "123451111", "p@me.com", "rolle1", "Straße 1", "ort 1",
+//                                   "plz1"),
+//                        new Person(2, "tatjana", "kraemer", "w", "123451111", "t@me.com", "rolle2", "Straße 1", "ort 2",
+//                                   "plz1"),
+//                        new Person(3, "igor", "stoljarow", "m", "123451111", "i@me.com", "rolle3", "Straße 1", "ort 3",
+//                                   "plz1"),
+//                        new Person(4, "filiz", "neumann", "w", "123451111", "f@me.com", "rolle4", "Straße 1", "ort 4",
+//                                   "plz1")
+//
+//
+//                });
 
 
         addComponent(new NavigationBar());
@@ -52,14 +54,10 @@ public class Users extends VerticalLayout implements View {
         grid = new Grid<>();
 
         addComponent(grid);
-        updateGrid();
         grid.addColumn(Person::getV_name).setCaption("Name");
         grid.addColumn(Person::getV_vorname).setCaption("Vorname");
+        grid.setItems(persons);
 
-
-
-        Button update = new Button("Update Table");
-        update.addClickListener((Button.ClickListener) clickEvent -> updateGrid());
 
         Button addUser = new Button("Add User");
         addUser.addClickListener((Button.ClickListener) clickEvent -> {
@@ -73,16 +71,17 @@ public class Users extends VerticalLayout implements View {
         HorizontalLayout hl = new HorizontalLayout();
 
         hl.addComponent(addUser);
-        hl.addComponent(update);
 
         addComponent(hl);
 
     }
 
-    private void updateGrid() {
-//        persons = PersonService.getInstance().getAllPersons();
+    public void addUser(Person p){
+        persons.add(p);
         grid.setItems(persons);
+
     }
+
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {

@@ -4,9 +4,12 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.VerticalLayout;
+import org.itpf.tanteemma.backend.models.Auslieferung;
 import org.itpf.tanteemma.backend.models.Bestellung;
 import org.itpf.tanteemma.backend.models.Bestellzuordnung;
+import org.itpf.tanteemma.backend.services.DeliveryService;
 import org.itpf.tanteemma.backend.services.OrderService;
+import org.itpf.tanteemma.frontend.EntryPoint;
 import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
 
 import java.util.ArrayList;
@@ -38,10 +41,10 @@ public class Orders extends VerticalLayout implements View {
     }
 
     public void addBestellung(Bestellung bestellung, List<Bestellzuordnung> bzs) {
-        OrderService service = new OrderService();
-        service.orderBestellung(bestellung);
+        OrderService service = OrderService.getInstance();
+//        service.orderBestellung(bestellung);
         for(Bestellzuordnung bz : bzs){
-            service.addArtikelToBestellung(bestellung, bz.getArtikel(), bz.getMenge());
+//            service.addArtikelToBestellung(bestellung, bz.getArtikel(), bz.getMenge());
         }
         bestellungen.add(bestellung);
         grid.setItems(bestellungen);

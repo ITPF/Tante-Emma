@@ -14,7 +14,16 @@ import java.util.List;
 public class DeliveryService {
     private DBHandler dbHandler;
 
-    public DeliveryService() {
+    private static DeliveryService instance;
+
+    public static DeliveryService getInstance(){
+        if(instance == null){
+            instance = new DeliveryService();
+        }
+        return instance;
+    }
+
+    private DeliveryService() {
         this.dbHandler = new DBHandler();
     }
 

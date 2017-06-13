@@ -12,6 +12,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
 import org.itpf.tanteemma.backend.models.Person;
 import org.itpf.tanteemma.backend.services.PersonService;
+import org.itpf.tanteemma.frontend.EntryPoint;
 
 /**
  * Created by Lindner.Patrick on 08.06.2017.
@@ -77,14 +78,17 @@ public class UserDetails extends Window {
         ok.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
-                PersonService.getInstance().createNewPerson(nachname.getValue(), vorname.getValue(), gender.getValue(),
-                                                            telefon.getValue(), email.getValue(), role.getValue(),
-                                                            strasse.getValue(), ort.getValue(), plz.getValue());
+//                PersonService.getInstance().createNewPerson(nachname.getValue(), vorname.getValue(), gender.getValue(),
+//                                                            telefon.getValue(), email.getValue(), role.getValue(),
+//                                                            strasse.getValue(), ort.getValue(), plz.getValue());
 
-                Notification.show("Person "+ vorname.getValue() + " " + nachname.getValue() + " wurde erstellt.");
+                Notification.show("Person " + vorname.getValue() + " " + nachname.getValue() + " wurde erstellt.");
+                EntryPoint.users.addUser(
+                        new Person(0, nachname.getValue(), vorname.getValue(), gender.getValue(), telefon.getValue(),
+                                   email.getValue(), role.getValue(), strasse.getValue(), ort.getValue(),
+                                   plz.getValue()));
             }
         });
-
 
 
         layout.addComponent(cancel);

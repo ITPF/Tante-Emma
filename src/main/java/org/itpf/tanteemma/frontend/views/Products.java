@@ -1,28 +1,24 @@
 package org.itpf.tanteemma.frontend.views;
 
-import com.vaadin.event.MouseEvents;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.renderers.ButtonRenderer;
 import org.itpf.tanteemma.backend.models.Artikel;
 import org.itpf.tanteemma.frontend.EntryPoint;
 import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Lindner.Patrick on 08.06.2017.
  */
 public class Products extends VerticalLayout implements View {
 
-    public static final String VIEW_NAME = "";
+    public static final String VIEW_NAME = "products";
 
     public Products() {
         addComponent(new NavigationBar());

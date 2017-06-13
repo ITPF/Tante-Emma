@@ -15,7 +15,16 @@ import java.util.Random;
 public class OrderService {
     private DBHandler dbHandler;
 
-    public OrderService() {
+    private static OrderService instance;
+
+    public static OrderService getInstance(){
+        if(instance == null){
+            instance = new OrderService();
+        }
+        return instance;
+    }
+
+    private OrderService() {
         this.dbHandler = new DBHandler();
     }
 
