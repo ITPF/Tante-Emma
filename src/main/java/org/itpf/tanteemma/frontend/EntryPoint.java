@@ -6,7 +6,9 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
+import org.itpf.tanteemma.backend.handler.DBHandler;
 import org.itpf.tanteemma.backend.models.Person;
+import org.itpf.tanteemma.backend.persistence.DBFiller;
 import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
 import org.itpf.tanteemma.frontend.views.Orders;
 import org.itpf.tanteemma.frontend.views.Products;
@@ -32,6 +34,8 @@ public class EntryPoint extends UI {
 
     protected void init(VaadinRequest vaadinRequest) {
 
+        DBFiller filler = new DBFiller(new DBHandler());
+        filler.emptyDBAndFillWithJunk();
 
         shoppingCart = new ShoppingCart();
         orders = new Orders();

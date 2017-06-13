@@ -8,6 +8,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import org.itpf.tanteemma.backend.models.Person;
+import org.itpf.tanteemma.backend.services.PersonService;
 import org.itpf.tanteemma.frontend.EntryPoint;
 
 /**
@@ -90,13 +91,13 @@ public class UserDetails extends Window {
                 if (!edit) {
                     EntryPoint.users.addUser(tmpP);
 
-//                    PersonService.getInstance().createNewPerson(tmpP);
+                    PersonService.getInstance().createNewPerson(tmpP);
                     Notification.show("Person " + tmpP.getV_vorname() + " " + tmpP.getV_name() + " wurde erstellt.");
 
                 } else {
                     EntryPoint.users.removeUser(p);
                     EntryPoint.users.addUser(tmpP);
-//                    PersonService.getInstance().updatePerson(tmpP);
+                    PersonService.getInstance().updatePerson(tmpP);
                 }
 
                 close();

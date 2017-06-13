@@ -5,10 +5,9 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import org.itpf.tanteemma.backend.models.Auslieferung;
 import org.itpf.tanteemma.backend.models.Bestellung;
 import org.itpf.tanteemma.backend.models.Bestellzuordnung;
-import org.itpf.tanteemma.backend.services.DeliveryService;
+import org.itpf.tanteemma.backend.models.Person;
 import org.itpf.tanteemma.backend.services.OrderService;
 import org.itpf.tanteemma.frontend.EntryPoint;
 import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
@@ -27,11 +26,15 @@ public class Orders extends Panel implements View {
 
     public Grid<Bestellung> grid;
 
+    public NavigationBar bar;
+
     public Orders() {
         super("Bestellungen");
         VerticalLayout layout = new VerticalLayout();
         setContent(layout);
-        layout.addComponent(new NavigationBar());
+
+        bar = new NavigationBar();
+        layout.addComponent(bar);
 
         bestellungen = new ArrayList<>();
         grid = new Grid<>();
@@ -48,9 +51,9 @@ public class Orders extends Panel implements View {
 
     public void addBestellung(Bestellung bestellung, List<Bestellzuordnung> bzs) {
         OrderService service = OrderService.getInstance();
-//        service.orderBestellung(bestellung);
+        service.orderBestellung(bestellung);
         for(Bestellzuordnung bz : bzs){
-//            service.addArtikelToBestellung(bestellung, bz.getArtikel(), bz.getMenge());
+            service.addArtikelToBestellung(bestellung, bz.getArtikel(), bz.getMenge());
         }
         bestellungen.add(bestellung);
         grid.setItems(bestellungen);
@@ -58,7 +61,11 @@ public class Orders extends Panel implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-
+        if (EntryPoint.person.getV_rolle().equals(Person.WORKER)) {
+            bar.enableAdmin(true);
+        } else if (EntryPoint.person.getV_rolle().equals(Person.KUNDE)) {
+            bar.enableAdmin(false);
+        }
 
     }
 

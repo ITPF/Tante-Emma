@@ -9,6 +9,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import org.itpf.tanteemma.backend.models.Person;
+import org.itpf.tanteemma.backend.services.PersonService;
 import org.itpf.tanteemma.frontend.customobjects.NavigationBar;
 import org.itpf.tanteemma.frontend.windows.UserDetails;
 
@@ -99,7 +100,7 @@ public class Users extends Panel implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-
-
+        persons = PersonService.getInstance().getAllPersons();
+        grid.setItems(persons);
     }
 }
