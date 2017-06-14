@@ -95,6 +95,7 @@ public class UserDetails extends Window {
                     Notification.show("Person " + tmpP.getV_vorname() + " " + tmpP.getV_name() + " wurde erstellt.");
 
                 } else {
+                    tmpP.setPn_id(p.getPn_id());
                     EntryPoint.users.removeUser(p);
                     EntryPoint.users.addUser(tmpP);
                     PersonService.getInstance().updatePerson(tmpP);

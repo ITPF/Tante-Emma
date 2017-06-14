@@ -37,7 +37,7 @@ public class PersonService {
     }
 
     public Person createNewPerson(Person person) {
-        if(person != null && person.getPn_id() != 0) {
+        if(person != null) {
             dbHandler.insertNewPerson(person);
             return dbHandler.selectPerson(person);
         } else {
